@@ -1,0 +1,1311 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.frmMain..Create(BaseForm)
+Gui.frmMain..Caption("Form")
+Gui.frmMain..Size(693,413)
+Gui.frmMain..MinX(0)
+Gui.frmMain..MinY(0)
+Gui.frmMain..Position(0,0)
+Gui.frmMain..AlwaysOnTop(False)
+Gui.frmMain..FontName("Tahoma")
+Gui.frmMain..FontSize(8.25)
+Gui.frmMain..ControlBox(True)
+Gui.frmMain..MaxButton(True)
+Gui.frmMain..MinButton(True)
+Gui.frmMain..MousePointer(0)
+Gui.frmMain..Moveable(True)
+Gui.frmMain..Sizeable(True)
+Gui.frmMain..ShowInTaskBar(True)
+Gui.frmMain..TitleBar(True)
+Gui.frmMain..Event(UnLoad,Unload)
+Gui.frmMain.tabSetup.Create(Tab)
+Gui.frmMain.tabSetup.Enabled(True)
+Gui.frmMain.tabSetup.Visible(True)
+Gui.frmMain.tabSetup.Zorder(0)
+Gui.frmMain.tabSetup.Size(693,383)
+Gui.frmMain.tabSetup.Position(0,0)
+Gui.frmMain.tabSetup.FontName("Tahoma")
+Gui.frmMain.tabSetup.FontSize(8.25)
+Gui.frmMain.tabSetup.Dock(5)
+Gui.frmMain.tabSetup.Tabs(3)
+Gui.frmMain.tabSetup.SetTab(0)
+Gui.frmMain.tabSetup.Caption("Disc Pct Tier")
+Gui.frmMain.tabSetup.SetTab(1)
+Gui.frmMain.tabSetup.Caption("Approver")
+Gui.frmMain.tabSetup.SetTab(2)
+Gui.frmMain.tabSetup.Caption("Approver - Customer")
+Gui.frmMain.scApproverCust.Create(SplitContainer)
+Gui.frmMain.scApproverCust.Enabled(True)
+Gui.frmMain.scApproverCust.Visible(True)
+Gui.frmMain.scApproverCust.Zorder(0)
+Gui.frmMain.scApproverCust.Size(691,354)
+Gui.frmMain.scApproverCust.Position(0,0)
+Gui.frmMain.scApproverCust.Orientation(0)
+Gui.frmMain.scApproverCust.SplitterPosition(245)
+Gui.frmMain.scApproverCust.Collapsed(False)
+Gui.frmMain.scApproverCust.Parent("tabSetup",2)
+Gui.frmMain.scApproverCust.Dock(5)
+Gui.frmMain.gsgcCustomers.Create(GsGridControl)
+Gui.frmMain.gsgcCustomers.Enabled(True)
+Gui.frmMain.gsgcCustomers.Visible(True)
+Gui.frmMain.gsgcCustomers.Zorder(0)
+Gui.frmMain.gsgcCustomers.Size(434,354)
+Gui.frmMain.gsgcCustomers.Position(0,0)
+Gui.frmMain.gsgcCustomers.Parent("scApproverCust",1)
+Gui.frmMain.gsgcCustomers.Dock(5)
+Gui.frmMain.gsgcCustomers.Event(CellValueChanged,gsgcCustomers_CellValueChanged)
+Gui.frmMain.gsgcApproverCust.Create(GsGridControl)
+Gui.frmMain.gsgcApproverCust.Enabled(True)
+Gui.frmMain.gsgcApproverCust.Visible(True)
+Gui.frmMain.gsgcApproverCust.Zorder(0)
+Gui.frmMain.gsgcApproverCust.Size(245,354)
+Gui.frmMain.gsgcApproverCust.Position(0,0)
+Gui.frmMain.gsgcApproverCust.Parent("scApproverCust",0)
+Gui.frmMain.gsgcApproverCust.Dock(5)
+Gui.frmMain.gsgcApproverCust.Event(RowClick,gsgcApproverCust_RowClick)
+Gui.frmMain.gsgcApprover.Create(GsGridControl)
+Gui.frmMain.gsgcApprover.Enabled(True)
+Gui.frmMain.gsgcApprover.Visible(True)
+Gui.frmMain.gsgcApprover.Zorder(0)
+Gui.frmMain.gsgcApprover.Size(691,354)
+Gui.frmMain.gsgcApprover.Position(0,0)
+Gui.frmMain.gsgcApprover.Parent("tabSetup",1)
+Gui.frmMain.gsgcApprover.Dock(5)
+Gui.frmMain.gsgcApprover.Event(RowCellClick,gsgcApprover_RowCellClick)
+Gui.frmMain.gsgcApprover.Event(CellValueChanged,gsgcApprover_CellValueChanged)
+Gui.frmMain.gsgcDiscPctTier.Create(GsGridControl)
+Gui.frmMain.gsgcDiscPctTier.Enabled(True)
+Gui.frmMain.gsgcDiscPctTier.Visible(True)
+Gui.frmMain.gsgcDiscPctTier.Zorder(0)
+Gui.frmMain.gsgcDiscPctTier.Size(691,354)
+Gui.frmMain.gsgcDiscPctTier.Position(0,0)
+Gui.frmMain.gsgcDiscPctTier.Parent("tabSetup",0)
+Gui.frmMain.gsgcDiscPctTier.Dock(5)
+Gui.frmMain.gsgcDiscPctTier.Event(RowCellClick,gsgcDiscPctTier_RowCellClick)
+Gui.frmMain.lkupGSS_USER.Create(Lookup)
+Gui.frmMain.lkupGSS_USER.Enabled(True)
+Gui.frmMain.lkupGSS_USER.PopulateMode(4)
+Gui.frmMain.lkupGSS_USER.Title("GSS Users")
+Gui.frmMain.lkupGSS_USER.StringBasis("")
+Gui.frmMain.lkupGSS_USER.FileBasis("")
+Gui.frmMain.lkupGSS_USER.ColumnDelim("")
+Gui.frmMain.lkupGSS_USER.RowDelim("")
+Gui.frmMain.lkupGSS_USER.PreferredStyle(0)
+Gui.frmMain.lkupGSS_USER.Event(SelectionMade,lkupGSS_USER_SelectionMade)
+Gui.frmMain.lkupDISC_TIER.Create(Lookup)
+Gui.frmMain.lkupDISC_TIER.Enabled(True)
+Gui.frmMain.lkupDISC_TIER.PopulateMode(4)
+Gui.frmMain.lkupDISC_TIER.Title("Discount Tier")
+Gui.frmMain.lkupDISC_TIER.StringBasis("")
+Gui.frmMain.lkupDISC_TIER.FileBasis("")
+Gui.frmMain.lkupDISC_TIER.ColumnDelim("")
+Gui.frmMain.lkupDISC_TIER.RowDelim("")
+Gui.frmMain.lkupDISC_TIER.PreferredStyle(0)
+Gui.frmMain.lkupDISC_TIER.Event(SelectionMade,lkupDISC_TIER_SelectionMade)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+v.Global.iCon.Declare(Long,0)
+v.Global.bDiscPctTierEdit.Declare(Boolean,False)
+v.Global.iRowEditedDiscPctTier.Declare(Long,-1)
+v.Global.sDiscPctTier_CATEGORY.Declare(String)
+v.Global.fLOWER_DISCOUNT.Declare(Float)
+v.Global.fUPPER_DISCOUNT.Declare(Float)
+v.Global.bApproverEdit.Declare(Boolean,False)
+v.Global.iRowEditedApprover.Declare(Long,-1)
+v.Global.sApprover_CATEGORY.Declare(String)
+v.Global.iDISC_TIER_ID.Declare(Long)
+v.Global.sGSS_USER.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.bExist.Declare
+	
+	f.ODBC.Connection!con.OpenCompanyConnection(600)
+	f.ODBC.Connection!CommonCon.OpenConnection(V.Ambient.Ccon,V.Ambient.Cuser,V.Ambient.Cpass)
+	
+	f.ODBC.Connection!con.TableExists("GAB_6555_DISC_TIER",v.Local.bExist)
+	f.Intrinsic.Control.If(v.Local.bExist,=,False)
+		f.ODBC.Connection!con.Execute("CREATE TABLE GAB_6555_DISC_TIER(ID IDENTITY, CATEGORY VARCHAR(30), LOWER_DISCOUNT NUMERIC(5,4), UPPER_DISCOUNT NUMERIC(5,4), PRIMARY KEY(ID));")
+	f.Intrinsic.Control.EndIf
+	
+	f.ODBC.Connection!con.TableExists("GAB_6555_APVR_CUST",v.Local.bExist)
+	f.Intrinsic.Control.If(v.Local.bExist,=,False)
+		f.ODBC.Connection!con.Execute("CREATE TABLE GAB_6555_APVR_CUST(GSS_USER VARCHAR(8), CUSTOMER VARCHAR(8), PRIMARY KEY(GSS_USER,CUSTOMER));")
+	f.Intrinsic.Control.EndIf
+	
+	f.ODBC.Connection!con.TableExists("GAB_6555_APVR",v.Local.bExist)
+	f.Intrinsic.Control.If(v.Local.bExist,=,False)
+		f.ODBC.Connection!con.Execute("CREATE TABLE GAB_6555_APVR(GSS_USER VARCHAR(8), DISC_TIER_ID INTEGER); CREATE INDEX GAB_6555_APVRK01 USING 0 ON GAB_6555_APVR(GSS_USER);")
+	f.Intrinsic.Control.EndIf
+	
+	f.ODBC.Connection!con.TableExists("GAB_6555_APRVL",V.Local.bExist)
+	f.Intrinsic.Control.If(V.Local.bExist,=,False)
+		f.ODBC.Connection!con.Execute("CREATE TABLE GAB_6555_APRVL(QUOTE_NO VARCHAR(7) NOT NULL, DATE_QUOTE DATE NOT NULL, CUSTOMER VARCHAR(6) NOT NULL, CUST_AMOUNT NUMERIC(15,2), AMOUNT NUMERIC(15,2), MAX_DISCOUNT NUMERIC(5,4), DATE_DUE DATE NOT NULL, ORIGINATOR VARCHAR(8) NOT NULL, APPROVER VARCHAR(8), APPROVED_DATE DATETIME); CREATE INDEX GAB_6555_APRVLK01 USING 0 ON GAB_6555_APRVL(QUOTE_NO);")
+	f.Intrinsic.Control.EndIf
+
+	'Set the form Caption
+	gui.frmMain..Caption("Quote Approval Setup (6555)")
+	
+	'0 = Disc Pct Tier
+	'1 = Approver
+	'Set the default active Tab to Disc Pct Tier
+	gui.frmMain.tabSetup.SetTab(0)
+	gui.frmMain.gsgcCustomers.Enabled(False)
+	
+	f.Intrinsic.Control.CallSub(LoadGridview)
+	f.Intrinsic.Control.CallSub(Populate_lkupDISC_TIER)
+	f.Intrinsic.Control.CallSub(Populate_lkupGSS_USER)
+	
+	
+	'Prevent the form from using DarkTheme
+	F.Intrinsic.Task.SetEnvironmentVariable("USEDARKTHEME",False)
+	Gui.frmMain..ApplyTheme()
+	
+	gui.frmMain..Show
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	
+	f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier.Exists)
+		f.Data.DataTable.Close("dtDiscPctTier")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.DataTable.dtApprover.Exists)
+		f.Data.DataTable.Close("dtApprover")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.DataTable.dtApproverCust.Exists)
+		f.Data.DataTable.Close("dtApproverCust")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.DataTable.dtCustomers.Exists)
+		f.Data.DataTable.Close("dtCustomers")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.DataTable.dtlkupGSS_USER.Exists)
+		f.Data.DataTable.Close("dtlkupGSS_USER")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.DataTable.dtlkupDISC_TIER.Exists)
+		f.Data.DataTable.Close("dtlkupDISC_TIER")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(V.ODBC.con.State,=,1)
+		f.ODBC.Connection!con.close
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(V.ODBC.CommonCon.State,=,1)
+		f.ODBC.Connection!CommonCon.close
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.End
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.End
+f.Intrinsic.Control.EndTry	
+Program.Sub.Unload.End
+
+Program.Sub.LoadGridview.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.sSQL.Declare
+	v.Local.bExist.Declare
+	
+	gui.frmMain.tabSetup.Enabled(False)
+	
+	'Disc Pct Tier
+	f.Data.DataTable.CreateFromSQL("dtDiscPctTier","con","select ID, CATEGORY, LOWER_DISCOUNT, UPPER_DISCOUNT from GAB_6555_DISC_TIER order by LOWER_DISCOUNT, UPPER_DISCOUNT;",True)
+	f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier.RowCount,=,0)
+		f.Data.DataTable.AddRow("dtDiscPctTier","ID",0,"CATEGORY","","LOWER_DISCOUNT",0.0000,"UPPER_DISCOUNT",0.0000)
+	f.Intrinsic.Control.EndIf
+	
+	f.Data.DataTable.AddColumn("dtDiscPctTier","Add","Long",0)
+	f.Data.DataTable.AddColumn("dtDiscPctTier","Save","Long",0)
+	f.Data.DataTable.AddColumn("dtDiscPctTier","Edit","Long",0)
+	f.Data.DataTable.AddColumn("dtDiscPctTier","Cancel","Long",0)
+	f.Data.DataTable.AddColumn("dtDiscPctTier","Delete","Long",0)
+	
+	gui.frmMain.gsgcDiscPctTier.AddGridviewFromDatatable("gvDiscPctTier","dtDiscPctTier")
+	gui.frmMain.gsgcDiscPctTier.MainView("gvDiscPctTier")
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","Visible",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","Caption","ID")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","HeaderFontBold",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","ReadOnly",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","MinWidth",40)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","ID","HeaderHAlignment","Center")
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","Caption","Category")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","HeaderFontBold",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","ReadOnly",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","MinWidth",100)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","MaxLength",30)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","HeaderHAlignment","Center")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","VisibleIndex",1)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","Caption","Lower Discount")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","HeaderFontBold",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","ReadOnly",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","MinWidth",80)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","EditMaskType","numeric")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","EditMask","##0.00%")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","EditMaskAsDisplayFormat",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","HeaderHAlignment","Center")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","VisibleIndex",2)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","Caption","Upper Discount")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","HeaderFontBold",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","ReadOnly",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","MinWidth",80)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","EditMaskType","numeric")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","EditMask","##0.00%")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","EditMaskAsDisplayFormat",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","HeaderHAlignment","Center")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","VisibleIndex",3)
+	
+	gui.frmMain.gsgcDiscPctTier.ColumnEdit("gvDiscPctTier","Add","EditorButton","Add")
+	gui.frmMain.gsgcDiscPctTier.ColumnEdit("gvDiscPctTier","Save","EditorButton","Save")
+	gui.frmMain.gsgcDiscPctTier.ColumnEdit("gvDiscPctTier","Edit","EditorButton","Edit")
+	gui.frmMain.gsgcDiscPctTier.ColumnEdit("gvDiscPctTier","Cancel","EditorButton","Cancel")
+	gui.frmMain.gsgcDiscPctTier.ColumnEdit("gvDiscPctTier","Delete","EditorButton","Delete")
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Add","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Add","ShowCaption",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Add","MinWidth",40)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Add","FixedWidth",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Add","Fixed","Right")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Add","VisibleIndex",4)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Save","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Save","ShowCaption",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Save","MinWidth",40)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Save","FixedWidth",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Save","Fixed","Right")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Save","VisibleIndex",5)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Edit","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Edit","ShowCaption",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Edit","MinWidth",40)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Edit","FixedWidth",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Edit","Fixed","Right")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Edit","VisibleIndex",6)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Cancel","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Cancel","ShowCaption",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Cancel","MinWidth",40)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Cancel","FixedWidth",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Cancel","Fixed","Right")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Cancel","VisibleIndex",7)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Delete","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Delete","ShowCaption",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Delete","MinWidth",40)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Delete","FixedWidth",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Delete","Fixed","Right")
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","Delete","VisibleIndex",8)
+		
+	'Approver
+	f.Data.DataTable.CreateFromSQL("dtApprover","con","select CONVERT(0,SQL_INTEGER) AS ID, A.DISC_TIER_ID, A.GSS_USER, B.CATEGORY from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID order by A.GSS_USER;",True)
+	f.Intrinsic.Control.If(v.DataTable.dtApprover.RowCount,=,0)
+		f.Data.DataTable.AddRow("dtApprover","ID",0,"GSS_USER","","DISC_TIER_ID",0,"CATEGORY","")
+	f.Intrinsic.Control.Else
+		'Renumber the ID
+		f.Data.DataTable.SetSeries("dtApprover","ID",1,1)
+	f.Intrinsic.Control.EndIf
+	
+	f.Data.DataTable.AddColumn("dtApprover","lkupGSS_USER","Long",0)
+	f.Data.DataTable.AddColumn("dtApprover","lkupDISC_TIER","Long",0)
+	f.Data.DataTable.AddColumn("dtApprover","Add","Long",0)
+	f.Data.DataTable.AddColumn("dtApprover","Save","Long",0)
+	f.Data.DataTable.AddColumn("dtApprover","Edit","Long",0)
+	f.Data.DataTable.AddColumn("dtApprover","Cancel","Long",0)
+	f.Data.DataTable.AddColumn("dtApprover","Delete","Long",0)
+	
+	gui.frmMain.gsgcApprover.AddGridviewFromDatatable("gvApprover","dtApprover")
+	gui.frmMain.gsgcApprover.MainView("gvApprover")
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","Visible",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","Caption","ID")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","HeaderFontBold",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","ReadOnly",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","ID","HeaderHAlignment","Center")
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","Visible",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","Caption","DISC_TIER_ID")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","HeaderFontBold",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","ReadOnly",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","HeaderHAlignment","Center")
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","Caption","Username")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","HeaderFontBold",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","ReadOnly",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","MinWidth",60)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","MaxLength",8)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","VisibleIndex",0)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","Caption","Username Lookup")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","Icon","Browse")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","HeaderFontBold",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","AllowEdit",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","ReadOnly",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","Width",10)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","VisibleIndex",1)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","Caption","Category")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","HeaderFontBold",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","ReadOnly",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","MinWidth",100)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","MaxLength",30)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","VisibleIndex",2)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","Caption","Category Lookup")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","Icon","Browse")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","HeaderFontBold",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","AllowEdit",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","ReadOnly",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","Width",10)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","VisibleIndex",3)
+	
+	gui.frmMain.gsgcApprover.ColumnEdit("gvApprover","Add","EditorButton","Add")
+	gui.frmMain.gsgcApprover.ColumnEdit("gvApprover","Save","EditorButton","Save")
+	gui.frmMain.gsgcApprover.ColumnEdit("gvApprover","Edit","EditorButton","Edit")
+	gui.frmMain.gsgcApprover.ColumnEdit("gvApprover","Cancel","EditorButton","Cancel")
+	gui.frmMain.gsgcApprover.ColumnEdit("gvApprover","Delete","EditorButton","Delete")
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Add","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Add","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Add","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Add","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Add","Fixed","Right")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Add","VisibleIndex",4)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Save","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Save","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Save","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Save","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Save","Fixed","Right")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Save","VisibleIndex",5)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Edit","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Edit","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Edit","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Edit","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Edit","Fixed","Right")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Edit","VisibleIndex",6)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Cancel","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Cancel","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Cancel","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Cancel","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Cancel","Fixed","Right")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Cancel","VisibleIndex",7)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Delete","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Delete","ShowCaption",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Delete","MinWidth",40)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Delete","FixedWidth",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Delete","Fixed","Right")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","Delete","VisibleIndex",8)
+	
+	
+	'Approver in Tab Approver - Customer 
+	'Create datatable for the Approver & Full Name
+	f.Data.DataTable.CreateFromSQL("dtApproverCust","con","select A.GSS_USER, B.CATEGORY, '' AS FullName from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID order by A.GSS_USER;",True)
+	'Create Dictionary User First Name & Last Name
+	f.Intrinsic.String.Build("select gs_user as GSS_USER, rtrim(first_name)+' '+rtrim(last_name) as FullName from user_information where company = '{0}' or company = '' order by gs_user",v.Caller.CompanyCode,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dictUserFullName","CommonCon",V.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dictUserFullName","")
+	f.Data.DataTable.FillFromDictionary("dtApproverCust","dictUserFullName","GSS_USER","FullName")
+	f.Data.Dictionary.Close("dictUserFullName")
+	
+	gui.frmMain.gsgcApproverCust.AddGridviewFromDatatable("gvApproverCust","dtApproverCust")
+	gui.frmMain.gsgcApproverCust.MainView("gvApproverCust")
+	
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","Caption","Approver")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","HeaderFontBold",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","AllowEdit",False)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","ReadOnly",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","MinWidth",60)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","VisibleIndex",0)
+	
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","Caption","Category")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","HeaderFontBold",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","AllowEdit",False)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","ReadOnly",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","MinWidth",100)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","VisibleIndex",1)
+	
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","Caption","Full Name")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","HeaderFontBold",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","AllowEdit",False)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","ReadOnly",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","MinWidth",150)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","VisibleIndex",2)
+
+	
+	'Customers/Prospects in Tab Approver - Customer 
+	'Check whether GAB_CUSTOMER_LONG table exists
+	f.ODBC.Connection!con.TableExists("GAB_CUSTOMER_LONG",v.Local.bExist)
+	f.Intrinsic.Control.If(v.Local.bExist)
+		f.Data.DataTable.CreateFromSQL("dtCustomerTemp","con","select rtrim(c1.customer) as Customer, if(c2.customerlong <> '',c2.customerlong,c1.Name_Customer) as CustomerName, c1.country as Country from v_customer_master c1 left join gab_customer_long c2 on c1.customer = c2.customer;",True)
+	f.Intrinsic.Control.Else
+		f.Data.DataTable.CreateFromSQL("dtCustomerTemp","con","select rtrim(c1.customer) as Customer, c1.Name_Customer as CustomerName, c1.country as Country from v_customer_master c1;",True)
+	f.Intrinsic.Control.EndIf
+	'Check whether GAB_CUSTOMER_LONG table exists
+	f.ODBC.Connection!con.TableExists("GAB_PROSPECT_LONG",v.Local.bExist)
+	f.Intrinsic.Control.If(v.Local.bExist)
+		f.Data.DataTable.CreateFromSQL("dtProspectTemp","con","select rtrim(c1.prospect) as Customer, if(c2.prospectlong <> '',c2.prospectlong,c1.Name_Prospect) as CustomerName, c1.country as Country from v_prospect_master c1 left join gab_prospect_long c2 on c1.prospect = c2.prospect;",True)
+	f.Intrinsic.Control.Else
+		f.Data.DataTable.CreateFromSQL("dtProspectTemp","con","select rtrim(c1.prospect) as Customer, c1.Name_Prospect as CustomerName, c1.country as Country from v_prospect_master c1;",True)
+	f.Intrinsic.Control.EndIf
+	'Merge both tables into one datatable
+	f.Data.DataTable.Merge("dtProspectTemp","dtCustomerTemp",True,2)
+	'Create DataTable Sorted
+	f.Data.DataView.Create("dtCustomerTemp","dvCustomerTemp",22,"","Customer ASC")
+	f.Data.DataView.ToDataTable("dtCustomerTemp","dvCustomerTemp","dtCustomers",True)
+	'Add Column to dtCustomers
+	f.Data.DataTable.AddColumn("dtCustomers","Selected","Boolean",False)
+	'Delete DataTable
+	f.Data.DataTable.Close("dtCustomerTemp")
+	f.Data.DataTable.Close("dtProspectTemp")
+	
+	gui.frmMain.gsgcCustomers.AddGridviewFromDatatable("gvCustomers","dtCustomers")
+	gui.frmMain.gsgcCustomers.MainView("gvCustomers")
+	
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","Caption","Customer")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","HeaderFontBold",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","AllowEdit",False)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","ReadOnly",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","MinWidth",60)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","HeaderHAlignment","Center")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Customer","VisibleIndex",1)
+	
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","Caption","Customer Name")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","HeaderFontBold",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","AllowEdit",False)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","ReadOnly",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","MinWidth",150)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","HeaderHAlignment","Center")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","CustomerName","VisibleIndex",2)
+	
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","Caption","Country")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","HeaderFontBold",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","AllowEdit",False)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","ReadOnly",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","MinWidth",100)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","HeaderHAlignment","Center")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Country","VisibleIndex",3)
+	
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","ShowCaption",False)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","Caption","Selected")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","AllowEdit",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","ReadOnly",False)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","MinWidth",40)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","FixedWidth",True)
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","Fixed","Left")
+	gui.frmMain.gsgcCustomers.SetColumnProperty("gvCustomers","Selected","VisibleIndex",0)
+	
+	gui.frmMain.tabSetup.Enabled(True)
+	
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.LoadGridview.End
+
+Program.Sub.gsgcDiscPctTier_RowCellClick.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.iRet.Declare
+	v.Local.sQueryRet.Declare
+	v.Local.sQuery.Declare
+	v.Local.sFilter.Declare
+	v.Local.iColIndex.Declare
+	
+	f.Intrinsic.Control.If(v.Args.Button.UCase,=,"LEFT")
+		f.Intrinsic.Control.SelectCase(V.Args.Column.UCase)
+			f.Intrinsic.Control.Case("ADD")			
+				f.Intrinsic.Control.If(v.Global.bDiscPctTierEdit)
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.Else
+					f.Data.DataView.Create("dtDiscPctTier","dvApprover",22,"ID = 0","")
+					f.Intrinsic.Control.If(v.DataView.dtDiscPctTier!dvApprover.RowCount,=,0)
+						f.Data.DataTable.AddRow("dtDiscPctTier","ID",0,"CATEGORY","","LOWER_DISCOUNT",0.0000,"UPPER_DISCOUNT",0.0000)
+						f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+						gui.frmMain.gsgcDiscPctTier.SetRowAppearance("gvDiscPctTier",v.DataTable.dtDiscPctTier.RowCount--,"BackColor","LightYellow")
+						v.Global.sDiscPctTier_CATEGORY.Set(v.DataTable.dtDiscPctTier(v.DataTable.dtDiscPctTier.RowCount--).CATEGORY!FieldValTrim)
+						v.Global.fLOWER_DISCOUNT.Set(v.DataTable.dtDiscPctTier(v.DataTable.dtDiscPctTier.RowCount--).LOWER_DISCOUNT!FieldVal)
+						v.Global.fUPPER_DISCOUNT.Set(v.DataTable.dtDiscPctTier(v.DataTable.dtDiscPctTier.RowCount--).UPPER_DISCOUNT!FieldVal)
+						v.Global.bDiscPctTierEdit.Set(True)
+						v.Global.iRowEditedDiscPctTier.Set(v.DataTable.dtDiscPctTier.RowCount--)
+						f.Intrinsic.Control.CallSub(EnableDiscPctTierColumns,"ID",v.DataTable.dtDiscPctTier(v.DataTable.dtDiscPctTier.RowCount--).ID!FieldVal,"RowIndex",v.DataTable.dtDiscPctTier.RowCount--)
+					f.Intrinsic.Control.EndIf
+					f.Data.DataView.Close("dtDiscPctTier","dvApprover")
+				f.Intrinsic.Control.EndIf
+				
+			f.Intrinsic.Control.Case("SAVE")		
+				f.Intrinsic.Control.If(v.Global.bDiscPctTierEdit)
+					f.Intrinsic.Control.If(v.Args.RowIndex,=,v.Global.iRowEditedDiscPctTier)
+						'Logic for saving the record
+						'Validate the range of the discount (should be 0% to 100%)
+						f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal,<,0.0000,"OR",v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal,>,1.0000)
+							f.Intrinsic.UI.Msgbox("The discount range should be 0% to 100%","Validation Error")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf
+						'Validate the range of the discount (should be 0% to 100%)
+						f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal,<,0.0000,"OR",v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal,>,1.0000)
+							f.Intrinsic.UI.Msgbox("The discount range should be 0% to 100%","Validation Error")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf
+						'Validate the record to make sure Lower Discount is less than Upper Discount
+						f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal,>=,v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal)
+							f.Intrinsic.UI.Msgbox("The discount range is invalid","Validation Error")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf
+						'Validate the record to make sure no duplicate CATEGORY
+						f.Intrinsic.String.Build("CATEGORY = '{0}' AND ID <> {1}",v.DataTable.dtDiscPctTier(v.Args.RowIndex).CATEGORY!FieldValTrim,v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,v.Local.sFilter)
+						f.Data.DataView.Create("dtDiscPctTier","dvApprover",22,v.Local.sFilter,"")
+						f.Intrinsic.Control.If(v.DataView.dtDiscPctTier!dvApprover.RowCount,<>,0)
+							f.Intrinsic.UI.Msgbox("The Category already exists","Validation Error")
+							f.Data.DataView.Close("dtDiscPctTier","dvApprover")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.Else
+							f.Data.DataView.Close("dtDiscPctTier","dvApprover")
+						f.Intrinsic.Control.EndIf								
+						'Validate the record to make sure discount range not overlapped 
+						f.Intrinsic.String.Build("((LOWER_DISCOUNT <= {0} AND UPPER_DISCOUNT >= {0}) OR (LOWER_DISCOUNT <= {1} AND UPPER_DISCOUNT >= {1})) AND ID <> {2}",v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal,v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal,v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,v.Local.sFilter)
+						f.Data.DataView.Create("dtDiscPctTier","dvApprover",22,v.Local.sFilter,"")
+						f.Intrinsic.Control.If(v.DataView.dtDiscPctTier!dvApprover.RowCount,<>,0)
+							f.Intrinsic.UI.Msgbox("The discount range overlapped with other category.","Validation Error")
+							f.Data.DataView.Close("dtDiscPctTier","dvApprover")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.Else
+							f.Data.DataView.Close("dtDiscPctTier","dvApprover")
+						f.Intrinsic.Control.EndIf
+						'Pass validation
+						f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,=,0)     'New Record
+							'Save the new record
+							f.Intrinsic.String.Build("insert into GAB_6555_DISC_TIER(CATEGORY,LOWER_DISCOUNT,UPPER_DISCOUNT) VALUES('{0}',{1},{2});",v.DataTable.dtDiscPctTier(v.Args.RowIndex).CATEGORY!FieldValTrim,v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal,v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal,v.Local.sQuery)
+							f.ODBC.Connection!con.Execute(v.Local.sQuery)
+							f.Intrinsic.String.Build("select ID from GAB_6555_DISC_TIER where CATEGORY = '{0}';",v.DataTable.dtDiscPctTier(v.Args.RowIndex).CATEGORY!FieldValTrim,v.Local.sQuery)
+							f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sQuery,v.Local.sQueryRet)
+							f.Data.DataTable.SetValue("dtDiscPctTier",v.Args.RowIndex,"ID",v.Local.sQueryRet.Long)
+							f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+						f.Intrinsic.Control.Else
+							'Update record
+							f.Intrinsic.String.Build("update GAB_6555_DISC_TIER set CATEGORY = '{0}', LOWER_DISCOUNT = {1}, UPPER_DISCOUNT = {2} where ID = {3};",v.DataTable.dtDiscPctTier(v.Args.RowIndex).CATEGORY!FieldValTrim,v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal,v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal,v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,v.Local.sQuery)
+							f.ODBC.Connection!con.Execute(v.Local.sQuery)
+						f.Intrinsic.Control.EndIf
+						gui.frmMain.gsgcDiscPctTier.SetRowAppearance("gvDiscPctTier",v.Args.RowIndex,"BackColor",v.Color.White)
+						v.Global.bDiscPctTierEdit.Set(False)
+						v.Global.iRowEditedDiscPctTier.Set(-1)
+						f.Intrinsic.Control.CallSub(DisableDiscPctTierColumns,"ID",v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,"RowIndex",v.Args.RowIndex)
+						
+						'Refresh lkupDISC_TIER
+						f.Intrinsic.Control.CallSub(Populate_lkupDISC_TIER)
+						
+					f.Intrinsic.Control.Else
+						f.Intrinsic.UI.Msgbox("You are still editing a record. Please save or cancel that record first.")
+						f.Intrinsic.Control.ExitSub
+					f.Intrinsic.Control.EndIf
+				f.Intrinsic.Control.Else
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.Case("EDIT")
+				f.Intrinsic.Control.If(v.Global.bDiscPctTierEdit)
+					f.Intrinsic.UI.Msgbox("You are still editing a record. Please save or cancel that record first.")
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.Else
+					gui.frmMain.gsgcDiscPctTier.SetRowAppearance("gvDiscPctTier",v.Args.RowIndex,"BackColor","LightYellow")
+					v.Global.sDiscPctTier_CATEGORY.Set(v.DataTable.dtDiscPctTier(v.Args.RowIndex).CATEGORY!FieldValTrim)
+					v.Global.fLOWER_DISCOUNT.Set(v.DataTable.dtDiscPctTier(v.Args.RowIndex).LOWER_DISCOUNT!FieldVal)
+					v.Global.fUPPER_DISCOUNT.Set(v.DataTable.dtDiscPctTier(v.Args.RowIndex).UPPER_DISCOUNT!FieldVal)
+					v.Global.bDiscPctTierEdit.Set(True)
+					v.Global.iRowEditedDiscPctTier.Set(v.Args.RowIndex)
+					f.Intrinsic.Control.CallSub(EnableDiscPctTierColumns,"ID",v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,"RowIndex",v.Args.RowIndex)
+					gui.frmMain.gsgcDiscPctTier.GetColumnIndexByName("gvDiscPctTier","CATEGORY",v.Local.iColIndex)
+					gui.frmMain.gsgcDiscPctTier.FocusCell("gvDiscPctTier",v.Args.RowIndex,v.Local.iColIndex)
+					gui.frmMain.gsgcDiscPctTier.SelectCell("gvDiscPctTier",v.Args.RowIndex,v.Local.iColIndex,True)
+				f.Intrinsic.Control.EndIf
+				
+			f.Intrinsic.Control.Case("CANCEL")						
+				f.Intrinsic.Control.If(v.Global.bDiscPctTierEdit)
+					f.Intrinsic.Control.If(v.Args.RowIndex,=,v.Global.iRowEditedDiscPctTier)
+						f.Intrinsic.UI.Msgbox("Discard all changes?","Confirmation",1,v.Local.iRet)
+						f.Intrinsic.Control.If(v.Local.iRet,=,1)   'OK
+							'Reset Fields and Global Variables
+							v.Global.bDiscPctTierEdit.Set(False)
+							v.Global.iRowEditedDiscPctTier.Set(-1)
+							f.Intrinsic.Control.CallSub(DisableDiscPctTierColumns,"ID",v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,"RowIndex",v.Args.RowIndex)
+							
+							f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,=,0)
+								f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier.RowCount,>,1)	
+									gui.frmMain.gsgcDiscPctTier.SetRowAppearance("gvDiscPctTier",v.Args.RowIndex,"BackColor",v.Color.White)
+									f.Data.DataTable.DeleteRow("dtDiscPctTier",v.Args.RowIndex)
+									f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+								f.Intrinsic.Control.Else
+									gui.frmMain.gsgcDiscPctTier.SetRowAppearance("gvDiscPctTier",v.Args.RowIndex,"BackColor",v.Color.White)
+									f.Data.DataTable.SetValue("dtDiscPctTier",v.Args.RowIndex,"ID",0,"CATEGORY","","LOWER_DISCOUNT",0.0000,"UPPER_DISCOUNT",0.0000)
+									f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+								f.Intrinsic.Control.EndIf
+							f.Intrinsic.Control.Else
+								gui.frmMain.gsgcDiscPctTier.SetRowAppearance("gvDiscPctTier",v.Args.RowIndex,"BackColor",v.Color.White)
+								f.Data.DataTable.SetValue("dtDiscPctTier",v.Args.RowIndex,"CATEGORY",v.Global.sDiscPctTier_CATEGORY,"LOWER_DISCOUNT",v.Global.fLOWER_DISCOUNT,"UPPER_DISCOUNT",v.Global.fUPPER_DISCOUNT)
+								f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+							f.Intrinsic.Control.EndIf
+						f.Intrinsic.Control.Else
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf
+					f.Intrinsic.Control.EndIf
+				f.Intrinsic.Control.Else
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.EndIf
+				
+			f.Intrinsic.Control.Case("DELETE")
+				f.Intrinsic.Control.If(v.Global.bDiscPctTierEdit)
+					f.Intrinsic.UI.Msgbox("You are still editing a record. Please save or cancel.")
+					f.Intrinsic.Control.ExitSub					
+				f.Intrinsic.Control.Else
+					f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,<>,0)     'Existing Record
+						f.Intrinsic.UI.Msgbox("Delete this record?","Confirmation",1,v.Local.iRet)
+						f.Intrinsic.Control.If(v.Local.iRet,=,1)   'OK
+							'Logic for Deleting record
+							f.Intrinsic.String.Build("delete from GAB_6555_DISC_TIER where ID = {0};",v.DataTable.dtDiscPctTier(v.Args.RowIndex).ID!FieldVal,v.Local.sQuery)
+							f.ODBC.Connection!con.Execute(v.Local.sQuery)
+							'Remove the line from the datatable
+							f.Data.DataTable.DeleteRow("dtDiscPctTier",v.Args.RowIndex)
+							f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+							
+							'Check whether this is the last record
+							f.Intrinsic.Control.If(v.DataTable.dtDiscPctTier.RowCount,=,0)
+								'Add an empty record row
+								f.Data.DataTable.AddRow("dtDiscPctTier","ID",0,"CATEGORY","","LOWER_DISCOUNT",0.0000,"UPPER_DISCOUNT",0.0000)
+								f.Data.DataTable.AcceptChanges("dtDiscPctTier")
+							f.Intrinsic.Control.EndIf
+							
+							'Refresh lkupDISC_TIER
+							f.Intrinsic.Control.CallSub(Populate_lkupDISC_TIER)
+						
+'							'Refresh the Approver Category DDL
+'							f.Intrinsic.Control.CallSub(RefreshApproverCategoryDDL)
+						f.Intrinsic.Control.Else
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf	
+					f.Intrinsic.Control.EndIf
+				f.Intrinsic.Control.EndIf				
+		f.Intrinsic.Control.EndSelect
+	f.Intrinsic.Control.EndIf
+	
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.gsgcDiscPctTier_RowCellClick.End
+
+Program.Sub.EnableDiscPctTierColumns.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.iRowIndex.Declare
+	v.Local.iCnt.Declare
+	
+	v.Local.iRowIndex.Set(V.Args.RowIndex)
+	
+	'Disable all rows
+	f.Intrinsic.Control.For(v.Local.iCnt,0,v.DataTable.dtDiscPctTier.RowCount--,1)
+		gui.frmMain.gsgcDiscPctTier.SetRowProperty("gvDiscPctTier",v.Local.iCnt,"locked",True)
+	f.Intrinsic.Control.Next(v.Local.iCnt)
+	
+	'Only unlock the row to be edited/added
+	gui.frmMain.gsgcDiscPctTier.SetRowProperty("gvDiscPctTier",v.Local.iRowIndex,"locked",False)
+
+	'Enable the columns to be edited/added
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","AllowEdit",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","ReadOnly",False)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","AllowEdit",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","ReadOnly",False)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","AllowEdit",True)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","ReadOnly",False)
+	
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.EnableDiscPctTierColumns.End
+
+Program.Sub.DisableDiscPctTierColumns.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.iRowIndex.Declare
+	v.Local.iCnt.Declare
+	
+	v.Local.iRowIndex.Set(V.Args.RowIndex)
+	
+'	'Disable all rows
+'	f.Intrinsic.Control.For(v.Local.iCnt,0,v.DataTable.dtDiscPctTier.RowCount--,1)
+'		gui.frmMain.gsgcDiscPctTier.SetRowProperty("gvDiscPctTier",v.Local.iCnt,"locked",True)
+'	f.Intrinsic.Control.Next(v.Local.iCnt)
+	
+	'Lock the edited/added row
+	gui.frmMain.gsgcDiscPctTier.SetRowProperty("gvDiscPctTier",v.Local.iRowIndex,"locked",True)
+	
+	
+	'Disable the columns 
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","CATEGORY","ReadOnly",True)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","LOWER_DISCOUNT","ReadOnly",True)
+	
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","AllowEdit",False)
+	gui.frmMain.gsgcDiscPctTier.SetColumnProperty("gvDiscPctTier","UPPER_DISCOUNT","ReadOnly",True)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.DisableDiscPctTierColumns.End
+
+Program.Sub.gsgcApprover_RowCellClick.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.iRet.Declare
+	v.Local.sQueryRet.Declare
+	v.Local.sQuery.Declare
+	v.Local.sFilter.Declare
+	v.Local.iColIndex.Declare
+	v.Local.iID.Declare
+	v.Local.sRet.Declare
+	v.Local.iRowIndexSelect.Declare
+	
+	f.Intrinsic.Control.If(v.Args.Button.UCase,=,"LEFT")
+		f.Intrinsic.Control.SelectCase(V.Args.Column.UCase)
+			f.Intrinsic.Control.Case("LKUPGSS_USER")			
+				gui.frmMain.lkupGSS_USER.Show
+				
+			f.Intrinsic.Control.Case("LKUPDISC_TIER")
+				gui.frmMain.lkupDISC_TIER.Show
+		
+			f.Intrinsic.Control.Case("ADD")		
+				
+				f.Intrinsic.Control.If(v.Global.bApproverEdit)
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.Else
+					f.Data.DataView.Create("dtApprover","dvApprover",22,"ID = 0","")
+					f.Intrinsic.Control.If(v.DataView.dtApprover!dvApprover.RowCount,=,0)
+						f.Data.DataTable.AddRow("dtApprover","ID",0,"GSS_USER","","DISC_TIER_ID",0,"CATEGORY","","lkupGSS_USER",0,"lkupDISC_TIER",0)
+						f.Data.DataTable.AcceptChanges("dtApprover")
+						gui.frmMain.gsgcApprover.SetRowAppearance("gvApprover",v.DataTable.dtApprover.RowCount--,"BackColor","LightYellow")
+						v.Global.sGSS_USER.Set(v.DataTable.dtApprover(v.DataTable.dtApprover.RowCount--).GSS_USER!FieldValTrim)
+						v.Global.sApprover_CATEGORY.Set(v.DataTable.dtApprover(v.DataTable.dtApprover.RowCount--).CATEGORY!FieldValTrim)
+						v.Global.iDISC_TIER_ID.Set(v.DataTable.dtApprover(v.DataTable.dtApprover.RowCount--).DISC_TIER_ID!FieldVal)
+						v.Global.bApproverEdit.Set(True)
+						v.Global.iRowEditedApprover.Set(v.DataTable.dtApprover.RowCount--)
+						f.Intrinsic.Control.CallSub(EnableApproverColumns,"ID",v.DataTable.dtApprover(v.DataTable.dtApprover.RowCount--).ID!FieldVal,"RowIndex",v.DataTable.dtApprover.RowCount--)
+					f.Intrinsic.Control.EndIf
+					f.Data.DataView.Close("dtApprover","dvApprover")
+				f.Intrinsic.Control.EndIf
+				
+			f.Intrinsic.Control.Case("SAVE")		
+				
+				f.Intrinsic.Control.If(v.Global.bApproverEdit)
+					f.Intrinsic.Control.If(v.Args.RowIndex,=,v.Global.iRowEditedApprover)
+						'Logic for saving the record
+						'Validate whether Category Disc Tier exists							
+						f.Intrinsic.String.Build("CATEGORY = '{0}'",v.DataTable.dtApprover(v.Args.RowIndex).CATEGORY!FieldValTrim,v.Local.sFilter)
+						f.Data.DataTable.Select("dtlkupDISC_TIER",v.Local.sFilter,v.Local.sRet)
+						f.Intrinsic.Control.If(v.Local.sRet.Trim,=,"***NORETURN***")
+							f.Intrinsic.UI.Msgbox("Category does not exits","Validation Error")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.Else
+							f.Intrinsic.String.Split(v.Local.sRet,"*!*",v.Local.sRet)
+							v.Local.iRowIndexSelect.Set(v.Local.sRet(0).Long)
+							
+							'Set Value
+							f.Data.DataTable.SetValue("dtApprover",V.Args.RowIndex,"CATEGORY",v.DataTable.dtlkupDISC_TIER(v.Local.iRowIndexSelect).CATEGORY!FieldValTrim,"DISC_TIER_ID",v.DataTable.dtlkupDISC_TIER(v.Local.iRowIndexSelect).ID!FieldVal)
+							f.Data.DataTable.AcceptChanges("dtApprover")
+						f.Intrinsic.Control.EndIf
+						'Validate the record to make sure no duplicate User
+						f.Intrinsic.String.Build("GSS_USER = '{0}' AND ID <> {1}",v.DataTable.dtApprover(v.Args.RowIndex).GSS_USER!FieldValTrim,v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,v.Local.sFilter)
+						f.Data.DataView.Create("dtApprover","dvApprover",22,v.Local.sFilter,"")
+						f.Intrinsic.Control.If(v.DataView.dtApprover!dvApprover.RowCount,<>,0)
+							f.Intrinsic.UI.Msgbox("The user is already an approver","Validation Error")
+							f.Data.DataView.Close("dtApprover","dvApprover")
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.Else
+							f.Data.DataView.Close("dtApprover","dvApprover")
+						f.Intrinsic.Control.EndIf
+						'Pass validation
+						f.Intrinsic.Control.If(v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,=,0)     'New Record
+							'Save the new record
+							f.Intrinsic.String.Build("insert into GAB_6555_APVR(GSS_USER,DISC_TIER_ID) VALUES('{0}',{1});",v.DataTable.dtApprover(v.Args.RowIndex).GSS_USER!FieldValTrim,v.DataTable.dtApprover(v.Args.RowIndex).DISC_TIER_ID!FieldVal,v.Local.sQuery)
+							f.ODBC.Connection!con.Execute(v.Local.sQuery)
+							f.Data.DataTable.Compute("dtApprover","Max(ID)","",v.Local.iID)
+							f.Intrinsic.Math.Add(v.Local.iID,1,v.Local.iID)
+							f.Data.DataTable.SetValue("dtApprover",v.Args.RowIndex,"ID",v.Local.iID)
+							f.Data.DataTable.AcceptChanges("dtApprover")
+						f.Intrinsic.Control.Else
+							'Update record
+							f.Intrinsic.String.Build("update GAB_6555_APVR set DISC_TIER_ID = {0} where GSS_USER = '{1}';",v.DataTable.dtApprover(v.Args.RowIndex).DISC_TIER_ID!FieldVal,v.DataTable.dtApprover(v.Args.RowIndex).GSS_USER!FieldValTrim,v.Local.sQuery)
+							f.ODBC.Connection!con.Execute(v.Local.sQuery)
+						f.Intrinsic.Control.EndIf					
+						gui.frmMain.gsgcApprover.SetRowAppearance("gvApprover",v.Args.RowIndex,"BackColor",v.Color.White)
+						v.Global.bApproverEdit.Set(False)
+						v.Global.iRowEditedApprover.Set(-1)
+						f.Intrinsic.Control.CallSub(DisableApproverColumns,"ID",v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,"RowIndex",v.Args.RowIndex)
+						
+						'Refresh dtApproverCust
+						f.Intrinsic.Control.CallSub(Refresh_gvApproverCust)
+						
+'						'Refresh the Approver Category DDL
+'						f.Intrinsic.Control.CallSub(RefreshApproverCategoryDDL)
+						
+					f.Intrinsic.Control.Else
+						f.Intrinsic.UI.Msgbox("You are still editing a record. Please save or cancel that record first.")
+						f.Intrinsic.Control.ExitSub
+					f.Intrinsic.Control.EndIf
+				f.Intrinsic.Control.Else
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.Case("EDIT")
+				
+				f.Intrinsic.Control.If(v.Global.bApproverEdit)
+					f.Intrinsic.UI.Msgbox("You are still editing a record. Please save or cancel that record first.")
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.Else
+					gui.frmMain.gsgcApprover.SetRowAppearance("gvApprover",v.Args.RowIndex,"BackColor","LightYellow")
+					v.Global.sGSS_USER.Set(v.DataTable.dtApprover(v.Args.RowIndex).GSS_USER!FieldValTrim)
+					v.Global.sApprover_CATEGORY.Set(v.DataTable.dtApprover(v.Args.RowIndex).CATEGORY!FieldValTrim)
+					v.Global.iDISC_TIER_ID.Set(v.DataTable.dtApprover(v.Args.RowIndex).DISC_TIER_ID!FieldVal)
+					v.Global.bApproverEdit.Set(True)
+					v.Global.iRowEditedApprover.Set(v.Args.RowIndex)
+					f.Intrinsic.Control.CallSub(EnableApproverColumns,"ID",v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,"RowIndex",v.Args.RowIndex)
+					gui.frmMain.gsgcApprover.GetColumnIndexByName("gvApprover","GSS_USER",v.Local.iColIndex)
+					gui.frmMain.gsgcApprover.FocusCell("gvApprover",v.Args.RowIndex,v.Local.iColIndex)
+					gui.frmMain.gsgcApprover.SelectCell("gvApprover",v.Args.RowIndex,v.Local.iColIndex,True)
+				f.Intrinsic.Control.EndIf
+				
+			f.Intrinsic.Control.Case("CANCEL")		
+				
+				f.Intrinsic.Control.If(v.Global.bApproverEdit)
+					f.Intrinsic.Control.If(v.Args.RowIndex,=,v.Global.iRowEditedApprover)
+						f.Intrinsic.UI.Msgbox("Discard all changes?","Confirmation",1,v.Local.iRet)
+						f.Intrinsic.Control.If(v.Local.iRet,=,1)   'OK
+							'Reset Fields and Global Variables
+							v.Global.bApproverEdit.Set(False)
+							v.Global.iRowEditedApprover.Set(-1)
+							f.Intrinsic.Control.CallSub(DisableApproverColumns,"ID",v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,"RowIndex",v.Args.RowIndex)
+							
+							f.Intrinsic.Control.If(v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,=,0)
+								f.Intrinsic.Control.If(v.DataTable.dtApprover.RowCount,>,1)	
+									gui.frmMain.gsgcApprover.SetRowAppearance("gvApprover",v.Args.RowIndex,"BackColor",v.Color.White)
+									f.Data.DataTable.DeleteRow("dtApprover",v.Args.RowIndex)
+									f.Data.DataTable.AcceptChanges("dtApprover")
+								f.Intrinsic.Control.Else
+									gui.frmMain.gsgcApprover.SetRowAppearance("gvApprover",v.Args.RowIndex,"BackColor",v.Color.White)
+									f.Data.DataTable.SetValue("dtApprover",v.Args.RowIndex,"ID",0,"GSS_USER","","DISC_TIER_ID",0,"CATEGORY","")
+									f.Data.DataTable.AcceptChanges("dtApprover")
+								f.Intrinsic.Control.EndIf
+							f.Intrinsic.Control.Else
+								gui.frmMain.gsgcApprover.SetRowAppearance("gvApprover",v.Args.RowIndex,"BackColor",v.Color.White)
+								f.Data.DataTable.SetValue("dtApprover",v.Args.RowIndex,"GSS_USER",v.Global.sGSS_USER,"DISC_TIER_ID",v.Global.iDISC_TIER_ID,"CATEGORY",v.Global.sApprover_CATEGORY)
+								f.Data.DataTable.AcceptChanges("dtApprover")
+							f.Intrinsic.Control.EndIf
+							
+						f.Intrinsic.Control.Else
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf
+					f.Intrinsic.Control.EndIf
+				f.Intrinsic.Control.Else
+					f.Intrinsic.Control.ExitSub
+				f.Intrinsic.Control.EndIf
+				
+			f.Intrinsic.Control.Case("DELETE")
+				
+				f.Intrinsic.Control.If(v.Global.bApproverEdit)
+					f.Intrinsic.UI.Msgbox("You are still editing a record. Please save or cancel.")
+					f.Intrinsic.Control.ExitSub					
+				f.Intrinsic.Control.Else
+					f.Intrinsic.Control.If(v.DataTable.dtApprover(v.Args.RowIndex).ID!FieldVal,<>,0)     'Existing Record
+						f.Intrinsic.UI.Msgbox("Delete this record?","Confirmation",1,v.Local.iRet)
+						f.Intrinsic.Control.If(v.Local.iRet,=,1)   'OK
+							'Logic for Deleting record
+							f.Intrinsic.String.Build("delete from GAB_6555_APVR where GSS_USER = '{0}';",v.DataTable.dtApprover(v.Args.RowIndex).GSS_USER!FieldValTrim,v.Local.sQuery)
+							f.ODBC.Connection!con.Execute(v.Local.sQuery)
+							'Remove the line from the datatable
+							f.Data.DataTable.DeleteRow("dtApprover",v.Args.RowIndex)
+							f.Data.DataTable.AcceptChanges("dtApprover")
+							
+							'Check whether this is the last record
+							f.Intrinsic.Control.If(v.DataTable.dtApprover.RowCount,=,0)
+								'Add an empty record row
+								f.Data.DataTable.AddRow("dtApprover","ID",0,"GSS_USER","","DISC_TIER_ID",0,"CATEGORY","")
+'								f.Data.DataTable.AddRow("dtApprover","ID",0,"GSS_USER","","DISC_TIER_ID",0,"CATEGORY","","lkupGSS_USER",0,"lkupDISC_TIER",0)
+								f.Data.DataTable.AcceptChanges("dtApprover")
+							f.Intrinsic.Control.EndIf
+							
+							'Refresh dtApproverCust
+							f.Intrinsic.Control.CallSub(Refresh_gvApproverCust)
+							
+'							'Refresh the Approver Category DDL
+'							f.Intrinsic.Control.CallSub(RefreshApproverCategoryDDL)
+						f.Intrinsic.Control.Else
+							f.Intrinsic.Control.ExitSub
+						f.Intrinsic.Control.EndIf	
+					f.Intrinsic.Control.EndIf
+				f.Intrinsic.Control.EndIf				
+		f.Intrinsic.Control.EndSelect
+	f.Intrinsic.Control.EndIf
+	
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.gsgcApprover_RowCellClick.End
+
+Program.Sub.EnableApproverColumns.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.iRowIndex.Declare
+	v.Local.iCnt.Declare
+	
+	v.Local.iRowIndex.Set(V.Args.RowIndex)
+	
+	'Disable all rows
+	f.Intrinsic.Control.For(v.Local.iCnt,0,v.DataTable.dtApprover.RowCount--,1)
+		gui.frmMain.gsgcApprover.SetRowProperty("gvApprover",v.Local.iCnt,"locked",True)
+	f.Intrinsic.Control.Next(v.Local.iCnt)
+	
+	'Only unlock the row to be edited/added
+	gui.frmMain.gsgcApprover.SetRowProperty("gvApprover",v.Local.iRowIndex,"locked",False)
+	
+	'Enable the columns to be edited/added
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","AllowEdit",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","ReadOnly",False)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","Icon","Browse")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupDISC_TIER","ReadOnly",True)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","AllowEdit",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","ReadOnly",False)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","Icon","Browse")
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","ReadOnly",True)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.EnableApproverColumns.End
+
+Program.Sub.DisableApproverColumns.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.iRowIndex.Declare
+	v.Local.iCnt.Declare
+	
+	v.Local.iRowIndex.Set(V.Args.RowIndex)
+	
+	'Lock the edited/added row
+	gui.frmMain.gsgcApprover.SetRowProperty("gvApprover",v.Local.iRowIndex,"locked",True)
+	
+	'Disable the columns 	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","CATEGORY","ReadOnly",True)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","AllowEdit",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","DISC_TIER_ID","ReadOnly",False)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","AllowEdit",False)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","GSS_USER","ReadOnly",True)
+	
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","AllowEdit",True)
+	gui.frmMain.gsgcApprover.SetColumnProperty("gvApprover","lkupGSS_USER","ReadOnly",False)
+
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.DisableApproverColumns.End
+
+Program.Sub.Populate_lkupGSS_USER.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.sQuery.Declare
+	
+	f.Intrinsic.Control.If(v.DataTable.dtlkupGSS_USER.Exists)
+		f.Data.DataTable.Close("dtlkupGSS_USER")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.String.Build("select gs_user, first_name, last_name from user_information where enabled = 1 and (company = '{0}' or  company = '') order by gs_user;",v.Caller.CompanyCode,v.Local.sQuery)
+	f.Data.DataTable.CreateFromSQL("dtlkupGGS_USER","CommonCon",v.Local.sQuery,True)
+	
+	gui.frmMain.lkupGSS_USER.DataTableBasis("dtlkupGGS_USER")
+	gui.frmMain.lkupGSS_USER.Initialize
+	
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.Populate_lkupGSS_USER.End
+
+Program.Sub.Populate_lkupDISC_TIER.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	
+	f.Intrinsic.Control.If(v.DataTable.dtlkupDISC_TIER.Exists)
+		f.Data.DataTable.Close("dtlkupDISC_TIER")
+	f.Intrinsic.Control.EndIf
+	f.Data.DataTable.CreateFromSQL("dtlkupDISC_TIER","con","select category, convert(cast(lower_discount*100 as numeric(5,2)),sql_char) + '%' AS LOWER_DISCOUNT, convert(cast(upper_discount*100 as numeric(5,2)),sql_char) + '%' AS UPPER_DISCOUNT, ID from GAB_6555_DISC_TIER order by CATEGORY;",True)
+	
+	gui.frmMain.lkupDISC_TIER.DataTableBasis("dtlkupDISC_TIER")
+	gui.frmMain.lkupDISC_TIER.Initialize
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.Populate_lkupDISC_TIER.End
+
+Program.Sub.lkupGSS_USER_SelectionMade.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	
+	f.Data.DataTable.SetValue("dtApprover",v.Global.iRowEditedApprover,"GSS_USER",v.DataTable.lkupGSS_USER_Result(0).GS_USER!FieldValTrim)
+	f.Data.DataTable.AcceptChanges("dtApprover")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry		
+Program.Sub.lkupGSS_USER_SelectionMade.End
+
+Program.Sub.lkupDISC_TIER_SelectionMade.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	
+	f.Data.DataTable.SetValue("dtApprover",v.Global.iRowEditedApprover,"DISC_TIER_ID",v.DataTable.lkupDISC_TIER_Result(0).ID!FieldVal,"CATEGORY",v.DataTable.lkupDISC_TIER_Result(0).CATEGORY!FieldValTrim)
+	f.Data.DataTable.AcceptChanges("dtApprover")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry	
+Program.Sub.lkupDISC_TIER_SelectionMade.End
+
+Program.Sub.gsgcApprover_CellValueChanged.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.sFilter.Declare
+	v.Local.sRet.Declare
+	v.Local.iRowIndexSelect.Declare
+	
+	f.Intrinsic.Control.SelectCase(V.Args.Column.UCase)
+		F.Intrinsic.Control.CaseAny("GSS_USER")
+			f.Intrinsic.Control.If(v.DataTable.dtApprover(v.Args.RowIndex).GSS_USER!FieldValTrim,<>,"")			
+				'Validate whether GSS User exists
+				f.Intrinsic.String.Build("GS_USER = '{0}'",v.Args.Value.UCase,v.Local.sFilter)
+				f.Data.DataTable.Select("dtlkupGGS_USER",v.Local.sFilter,v.Local.sRet)
+				f.Intrinsic.Control.If(v.Local.sRet.Trim,=,"***NORETURN***")
+					f.Intrinsic.UI.Msgbox("The user is already an approver","Validation Error")
+				f.Intrinsic.Control.Else
+					'Convert to Upper Case
+					f.Data.DataTable.SetValue("dtApprover",V.Args.RowIndex,V.Args.Column,V.Args.Value.UCase)
+					f.Data.DataTable.AcceptChanges("dtApprover")
+				f.Intrinsic.Control.EndIf
+			f.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.CaseAny("CATEGORY")
+			f.Intrinsic.Control.If(v.DataTable.dtApprover(v.Args.RowIndex).CATEGORY!FieldValTrim,<>,"")
+				'Convert to Upper Case
+				f.Data.DataTable.SetValue("dtApprover",V.Args.RowIndex,V.Args.Column,V.Args.Value.UCase)
+				f.Data.DataTable.AcceptChanges("dtApprover")
+				
+				'Validate whether Category Disc Tier exists
+				f.Intrinsic.String.Build("CATEGORY = '{0}'",v.Args.Value.UCase,v.Local.sFilter)
+				f.Data.DataTable.Select("dtlkupDISC_TIER",v.Local.sFilter,v.Local.sRet)
+				f.Intrinsic.Control.If(v.Local.sRet.Trim,=,"***NORETURN***")
+					f.Data.DataTable.SetValue("dtApprover",V.Args.RowIndex,"DISC_TIER_ID",0)
+					f.Intrinsic.UI.Msgbox("Category does not exits","Validation Error")
+				f.Intrinsic.Control.Else
+					f.Intrinsic.String.Split(v.Local.sRet,"*!*",v.Local.sRet)
+					v.Local.iRowIndexSelect.Set(v.Local.sRet(0).Long)
+					
+					'Convert to Upper Case
+					f.Data.DataTable.SetValue("dtApprover",V.Args.RowIndex,"CATEGORY",v.DataTable.dtlkupDISC_TIER(v.Local.iRowIndexSelect).CATEGORY!FieldValTrim,"DISC_TIER_ID",v.DataTable.dtlkupDISC_TIER(v.Local.iRowIndexSelect).ID!FieldVal)
+					f.Data.DataTable.AcceptChanges("dtApprover")
+				f.Intrinsic.Control.EndIf
+			f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.EndSelect
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry		
+Program.Sub.gsgcApprover_CellValueChanged.End
+
+Program.Sub.gsgcApproverCust_RowClick.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.sSQL.Declare
+	
+	gui.frmMain.gsgcCustomers.Enabled(True)
+	f.Intrinsic.String.Build("select rtrim(customer), convert(1,sql_bit) from GAB_6555_APVR_CUST where gss_user = '{0}'",v.DataTable.dtApproverCust(V.Args.RowIndex).GSS_USER!FieldValTrim,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dicCustomer","con",V.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dicCustomer",False)
+	f.Data.DataTable.FillFromDictionary("dtCustomers","dicCustomer","Customer","Selected")
+	f.Data.Dictionary.Close("dicCustomer")
+	v.Global.sGSS_USER.Set(v.DataTable.dtApproverCust(V.Args.RowIndex).GSS_USER!FieldValTrim)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry
+Program.Sub.gsgcApproverCust_RowClick.End
+
+Program.Sub.gsgcCustomers_CellValueChanged.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.bValue.Declare
+	v.Local.sSQL.Declare
+	
+	v.Local.bValue.Set(v.Args.Value)
+	f.Intrinsic.Control.If(v.Local.bValue)
+		f.Intrinsic.String.Build("select * from GAB_6555_APVR_CUST where gss_user = '{0}' and customer = '{1}'",v.Global.sGSS_USER.Trim,v.DataTable.dtCustomers(V.Args.RowIndex).Customer!FieldValTrim,v.Local.sSQL)
+		f.ODBC.Connection!con.OpenLocalRecordsetRO("rst",v.Local.sSQL)
+		f.Intrinsic.Control.If(v.ODBC.con!rst.EOF)
+			f.Intrinsic.String.Build("insert into GAB_6555_APVR_CUST(gss_user,customer) values('{0}','{1}');",v.Global.sGSS_USER.Trim,v.DataTable.dtCustomers(V.Args.RowIndex).Customer!FieldValTrim,v.Local.sSQL)
+		f.Intrinsic.Control.Else
+			f.Intrinsic.String.Build("update GAB_6555_APVR_CUST set customer = '{1}' where gss_user = '{0}'",v.Global.sGSS_USER.Trim,v.DataTable.dtCustomers(V.Args.RowIndex).Customer!FieldValTrim,v.Local.sSQL)
+		f.Intrinsic.Control.EndIf
+		f.ODBC.Connection!con.Execute(v.Local.sSQL)
+		f.ODBC.con!rst.Close
+	f.Intrinsic.Control.Else
+		f.Intrinsic.String.Build("delete from GAB_6555_APVR_CUST where gss_user = '{0}' and customer = '{1}'",v.Global.sGSS_USER.Trim,v.DataTable.dtCustomers(V.Args.RowIndex).Customer!FieldValTrim,v.Local.sSQL)
+		f.ODBC.Connection!con.Execute(v.Local.sSQL)
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry
+Program.Sub.gsgcCustomers_CellValueChanged.End
+
+Program.Sub.Refresh_gvApproverCust.Start
+f.Intrinsic.Control.Try
+	v.Local.sError.Declare
+	v.Local.sSQL.Declare
+	
+	'Delete dtApproverCust
+	f.Intrinsic.Control.If(v.DataTable.dtApproverCust.Exists)
+		f.Data.DataTable.Close("dtApproverCust")
+	f.Intrinsic.Control.EndIf
+	
+	'Approver in Tab Approver - Customer 
+	'Create datatable for the Approver & Full Name
+	f.Data.DataTable.CreateFromSQL("dtApproverCust","con","select A.GSS_USER, B.CATEGORY, '' AS FullName from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID order by A.GSS_USER;",True)
+	'Create Dictionary User First Name & Last Name
+	f.Intrinsic.String.Build("select gs_user as GSS_USER, rtrim(first_name)+' '+rtrim(last_name) as FullName from user_information where company = '{0}' or company = '' order by gs_user",v.Caller.CompanyCode,v.Local.sSQL)
+	f.Data.Dictionary.CreateFromSQL("dictUserFullName","CommonCon",V.Local.sSQL)
+	f.Data.Dictionary.SetDefaultReturn("dictUserFullName","")
+	f.Data.DataTable.FillFromDictionary("dtApproverCust","dictUserFullName","GSS_USER","FullName")
+	f.Data.Dictionary.Close("dictUserFullName")
+	
+	gui.frmMain.gsgcApproverCust.AddGridviewFromDatatable("gvApproverCust","dtApproverCust")
+	gui.frmMain.gsgcApproverCust.MainView("gvApproverCust")
+	
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","Caption","Approver")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","HeaderFontBold",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","AllowEdit",False)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","ReadOnly",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","MinWidth",60)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","GSS_USER","VisibleIndex",0)
+	
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","Caption","Category")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","HeaderFontBold",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","AllowEdit",False)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","ReadOnly",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","MinWidth",100)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","CATEGORY","VisibleIndex",1)
+	
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","Caption","Full Name")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","HeaderFontBold",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","AllowEdit",False)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","ReadOnly",True)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","MinWidth",150)
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","HeaderHAlignment","Center")
+	gui.frmMain.gsgcApproverCust.SetColumnProperty("gvApproverCust","FullName","VisibleIndex",2)
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.String.Build("Project: {0}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}GAB Version: {5}}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	f.Intrinsic.UI.Msgbox(v.Local.sError)
+	f.Intrinsic.Control.CallSub(Unload)
+f.Intrinsic.Control.EndTry
+Program.Sub.Refresh_gvApproverCust.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$tdjohan$}$20220124163254789$}$8rAQhOSvlohpQhMDm1j544LwmwXnRbkhttvDj2cMP6fuXgbNw+WEVhmUbUwv9TAcC/qbVeDjmj8=
+Program.Sub.Comments.End
