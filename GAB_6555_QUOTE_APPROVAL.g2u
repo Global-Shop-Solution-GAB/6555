@@ -1,0 +1,1038 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.F_Reject..create(BaseForm)
+Gui.F_Reject..caption("Reason for Rejection (6555)")
+Gui.F_Reject..size(8790,2925)
+Gui.F_Reject..minx(0)
+Gui.F_Reject..miny(0)
+Gui.F_Reject..position(0,0)
+Gui.F_Reject..forecolor(0)
+Gui.F_Reject..BackColor(-2147483633)
+Gui.F_Reject..mousepointer(0)
+Gui.F_Reject..Event(UnLoad,F_Reject_Unload)
+Gui.F_Reject..AlwaysOnTop(False)
+Gui.F_Reject..FontName("Tahoma")
+Gui.F_Reject..FontSize(8.25)
+Gui.F_Reject..ControlBox(True)
+Gui.F_Reject..MaxButton(True)
+Gui.F_Reject..MinButton(True)
+Gui.F_Reject..Moveable(True)
+Gui.F_Reject..Sizeable(True)
+Gui.F_Reject..ShowInTaskBar(True)
+Gui.F_Reject..TitleBar(True)
+Gui.F_Reject.mltxt1.create(textboxm)
+Gui.F_Reject.mltxt1.size(6495,1995)
+Gui.F_Reject.mltxt1.position(195,195)
+Gui.F_Reject.mltxt1.fontsize(9)
+Gui.F_Reject.mltxt1.defaultvalue("")
+Gui.F_Reject.mltxt1.Enabled(True)
+Gui.F_Reject.mltxt1.Visible(True)
+Gui.F_Reject.mltxt1.Zorder(0)
+Gui.F_Reject.mltxt1.FontName("Tahoma")
+Gui.F_Reject.cmdSend.create(button)
+Gui.F_Reject.cmdSend.caption("Send")
+Gui.F_Reject.cmdSend.size(1425,540)
+Gui.F_Reject.cmdSend.position(6900,180)
+Gui.F_Reject.cmdSend.fontsize(9)
+Gui.F_Reject.cmdSend.event(Click,cmdsend_click)
+Gui.F_Reject.cmdSend.defaultvalue("")
+Gui.F_Reject.cmdSend.Enabled(True)
+Gui.F_Reject.cmdSend.Visible(True)
+Gui.F_Reject.cmdSend.Zorder(0)
+Gui.F_Reject.cmdSend.FontName("Tahoma")
+Gui.F_Approval..create(BaseForm)
+Gui.F_Approval..caption("Quote Requiring Approval (6555)")
+Gui.F_Approval..size(16485,9165)
+Gui.F_Approval..minx(0)
+Gui.F_Approval..miny(0)
+Gui.F_Approval..position(0,0)
+Gui.F_Approval..event(UnLoad,Unload)
+Gui.F_Approval..forecolor(0)
+Gui.F_Approval..fontstyle(False,False,False,False)
+Gui.F_Approval..BackColor(-2147483633)
+Gui.F_Approval..mousepointer(0)
+Gui.F_Approval..sizeable(True)
+Gui.F_Approval..AlwaysOnTop(False)
+Gui.F_Approval..FontName("Tahoma")
+Gui.F_Approval..FontSize(8.25)
+Gui.F_Approval..ControlBox(True)
+Gui.F_Approval..MaxButton(True)
+Gui.F_Approval..MinButton(True)
+Gui.F_Approval..Moveable(True)
+Gui.F_Approval..ShowInTaskBar(True)
+Gui.F_Approval..TitleBar(True)
+Gui.F_Approval.cmdRefresh.create(button)
+Gui.F_Approval.cmdRefresh.caption("REFRESH")
+Gui.F_Approval.cmdRefresh.size(1350,570)
+Gui.F_Approval.cmdRefresh.position(14850,90)
+Gui.F_Approval.cmdRefresh.defaultvalue("")
+Gui.F_Approval.cmdRefresh.Event(Click,LoadApprovalList)
+Gui.F_Approval.cmdRefresh.Enabled(True)
+Gui.F_Approval.cmdRefresh.Visible(True)
+Gui.F_Approval.cmdRefresh.Zorder(0)
+Gui.F_Approval.cmdRefresh.FontName("Tahoma")
+Gui.F_Approval.cmdRefresh.FontSize(8.25)
+Gui.F_Approval.picGSSLogo.Create(PictureBox)
+Gui.F_Approval.picGSSLogo.Size(4125,960)
+Gui.F_Approval.picGSSLogo.Position(105,90)
+Gui.F_Approval.picGSSLogo.Enabled(True)
+Gui.F_Approval.picGSSLogo.Visible(True)
+Gui.F_Approval.picGSSLogo.Zorder(0)
+Gui.F_Approval.GsGCApproval.Create(GsGridControl)
+Gui.F_Approval.GsGCApproval.Size(16080,7260)
+Gui.F_Approval.GsGCApproval.Position(105,1275)
+Gui.F_Approval.GsGCApproval.Event(RowCellClick,GridApproveReject)
+Gui.F_Approval.GsGCApproval.Enabled(True)
+Gui.F_Approval.GsGCApproval.Visible(True)
+Gui.F_Approval.GsGCApproval.Zorder(0)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.iReject.Declare
+Variable.Global.sQuote.Declare(String)
+Variable.Global.sSQL.Declare(String)
+Variable.Global.sOrig.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.sGSSLogo.Declare
+V.Local.sIconPath.Declare
+V.Local.sSql.Declare(String)
+V.Local.sPO.Declare(String)
+V.Local.sApprover.Declare(String)
+V.Local.sUser.Declare(String)
+V.Local.sMsg.Declare(String)
+V.Local.sEmail.Declare(String)
+V.Local.sOrigName.Declare(String)
+V.Local.sUserEmail.Declare(String)
+V.Local.sUserName.Declare(String)
+V.Local.fLimit.Declare(Float)
+V.Local.dDate.Declare(String)
+V.Local.iRet.Declare(Long)
+V.Local.sEmailID.Declare(String)
+V.Local.iSenderID.Declare(Long)
+V.Local.iReceiverID.Declare(Long)
+V.Local.sSender.Declare(String)
+V.Local.sReceiver.Declare(String)
+V.Local.sNotify.Declare(String)
+V.Local.sFile.Declare(String)
+V.Local.iPID.Declare(String)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Data.DataTable.CreateFromSQL("dtInv","con","select part as Part from inventory_mstr",True)
+
+F.Intrinsic.String.Concat(V.Caller.GlobalDir,"\ART\gss2.ico",V.Local.sIconPath)
+F.Intrinsic.String.Concat(V.Caller.GlobalDir,"\ART\GAB_GSS_Logo_Green_Dash.png",V.Local.sGSSLogo)
+
+Gui.F_Approval.picGSSLogo.Picture(V.Local.sGSSLogo)
+Gui.F_Approval..Icon(V.Local.sIconPath)
+Gui.F_Reject..Icon(V.Local.sIconPath)
+F.Intrinsic.UI.InvokeWaitDialog("Loading list of Quotes requiring approval")
+F.Intrinsic.Control.CallSub(Loadapprovallist)
+Gui.F_Approval.GsGCApproval.Anchor(15)
+Gui.F_Approval.cmdRefresh.Anchor(9)
+
+'Prevent the form from using DarkTheme
+F.Intrinsic.Task.SetEnvironmentVariable("USEDARKTHEME",False)
+Gui.F_Approval..ApplyTheme()
+Gui.F_Reject..ApplyTheme()
+
+'f.Global.Security.GetUserGroups(v.Caller.User.Trim,v.Local.sError)
+
+Gui.F_Approval..Show
+F.Intrinsic.UI.CloseWaitDialog
+
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.If(V.DataTable.dtDash.Exists)
+	F.Intrinsic.Control.If(V.DataView.dtDash!dvDash.Exists)
+		F.Data.DataView.Close("dtDash$dtLine","dvLine")
+		F.Data.DataView.Close("dtDash","dvDash")
+	F.Intrinsic.Control.EndIf
+	F.Data.DataTable.Close("dtDash$dtLine")
+	F.Data.DataTable.close("dtDash")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.DataTable.dtInv.Exists)
+	F.Data.DataTable.Close("dtInv")
+F.Intrinsic.Control.EndIf	
+
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Unload.End
+
+Program.Sub.Approve.Start
+F.Intrinsic.Control.SetErrorHandler("Approve_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.dDate.Declare(Date)
+'V.Local.fLimit.Declare(Float)
+
+V.Local.iMsgID.Declare
+V.Local.iRet.Declare
+V.Local.iUserR.Declare
+V.Local.iUserS.Declare
+
+V.Local.sDate.Declare
+V.Local.sEmail.Declare
+V.Local.sMsg.Declare
+V.Local.sOrigName.Declare
+V.Local.sSql.Declare
+V.Local.sSubject.Declare
+V.Local.sUserEmail.Declare
+V.Local.sUserName.Declare
+V.Local.sUser.Declare
+V.Local.sOriginator.Declare
+V.Local.sCustomer.Declare
+v.Local.sApprovedDate.Declare
+v.Local.sRecipientEmailAndName.Declare
+v.Local.sSenderEmailAndName.Declare
+
+V.Local.sUser.Set(V.Caller.User)
+'Make sure that a Quote was actually selected
+F.Intrinsic.Control.If(V.Global.sQuote.Trim,<>,"0000000")
+'	F.Intrinsic.Control.CallSub(Sum_po_amount)
+	
+'	V.Local.fLimit.Set(-1)
+
+	F.Intrinsic.String.Build("Select CUSTOMER, ORIGINATOR, APPROVER, APPROVED_DATE, MAX_DISCOUNT from GAB_6555_APRVL where quote_no = '{0}'",V.Global.sQuote.Trim,V.Global.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRW("rst",V.Global.sSql)
+	'Check if Quote in the GAB_6555_APRVL table
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+		F.Intrinsic.UI.Msgbox("Quote is not in the approval list.","NOTIFICATION")
+		F.Intrinsic.Control.CallSub(Unload)
+	F.Intrinsic.Control.Else		
+		F.Intrinsic.Control.If(V.ODBC.con!rst.FieldValTrim!APPROVER,<>,"")
+		F.Intrinsic.Control.AndIf(V.ODBC.con!rst.FieldValTrim!APPROVER,<>,"*REVISE*")
+			F.Intrinsic.UI.Msgbox("Quote has been approved.","NOTIFICATION")
+			F.Intrinsic.Control.CallSub(Unload)
+		F.Intrinsic.Control.Else
+			V.Local.sOriginator.Set(V.ODBC.con!rst.FieldValTrim!Originator)
+			V.Local.sCustomer.Set(V.ODBC.con!rst.FieldValTrim!Customer)
+			F.Intrinsic.String.Build("select A.GSS_USER, B.CATEGORY, B.LOWER_DISCOUNT, B.UPPER_DISCOUNT from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID WHERE A.GSS_USER = '{0}' AND (B.LOWER_DISCOUNT <= {1} AND UPPER_DISCOUNT >= {1});",V.Local.sUser.Trim,V.ODBC.con!rst.FieldValFloat!MAX_DISCOUNT,V.Local.sSQL)
+			F.ODBC.Connection!con.OpenLocalRecordsetRO("rstApp",V.Local.sSql)
+			'Check if the current user can approve the selected PO based on disc tier
+			F.Intrinsic.Control.If(V.ODBC.con!rstApp.EOF,=,True)
+				F.Intrinsic.UI.Msgbox("You are not set to approve this Quote.","NOTIFICATION")
+				F.Intrinsic.Control.CallSub(Unload)
+			F.Intrinsic.Control.Else
+				F.ODBC.con!rst.Set!Approver(V.Local.sUser.Trim)
+				F.Intrinsic.String.Format(V.Ambient.Now,"YYYY-MM-DD HH:NN:SS",V.Local.sApprovedDate)
+				F.ODBC.con!rst.Set!Approved_Date(V.Local.sApprovedDate)
+				F.ODBC.con!rst.Update
+				
+				'Get Sender's User ID
+				Function.Global.Security.GetUserID(V.Caller.User,V.Caller.CompanyCode,V.Local.iUserS)
+				Function.Global.Security.GetUserID(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.iUserR)
+				
+				'send a message that the Quote has been approved
+				F.Intrinsic.String.Concat("Quote ",V.Global.sQuote.Trim," Approved",V.Local.sSubject)
+				F.Intrinsic.String.Concat("Quote Number: ",V.Global.sQuote," has been approved by ",V.Caller.User," at ",V.Ambient.Now,V.Local.sMsg)
+'				F.Global.Messaging.InternalMessageCreate(-1,V.Ambient.Date,V.Local.iUserS.Trim,V.Local.sSubject,V.Local.sMsg,V.Local.iMsgID)
+'				F.Global.Messaging.InternalMessageQueueToUser(V.Local.iUserR,V.Local.iMsgID)
+
+				F.Global.Messaging.isCourierRunning(V.Local.iRet)
+				F.Intrinsic.Control.If(V.Local.iRet,<>,0)
+'					F.Global.Security.GetUserEmail(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.sEmail)
+'					F.Global.Security.GetFullName(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.sOrigName)
+'					F.Global.Security.GetUserEmail(V.Caller.User,V.Caller.CompanyCode,V.Local.sUserEmail)
+'					F.Global.Security.GetFullName(V.Caller.User,V.Caller.CompanyCode,V.Local.sUserName)
+'					F.Global.Messaging.CreateEMMessage(V.Local.sEmail,V.Local.sOrigName,V.Local.sUserEmail,V.Local.sUserName,V.Local.sSubject,V.Local.sMsg)
+''						F.Intrinsic.UI.Msgbox("Email Sent.")
+
+					'Recipient's Info
+					F.Global.Security.GetUserEmail(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.sEmail)
+					F.Global.Security.GetFullName(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.sOrigName)
+					F.Intrinsic.String.Concat(v.Local.sOrigName.Trim,"*!*",v.Local.sEmail.Trim,v.Local.sRecipientEmailAndName)
+					
+					'Sender's Info
+					F.Global.Security.GetUserEmail(V.Caller.User,V.Caller.CompanyCode,V.Local.sUserEmail)
+					F.Global.Security.GetFullName(V.Caller.User,V.Caller.CompanyCode,V.Local.sUserName)
+					F.Intrinsic.String.Concat(v.Local.sUserEmail.Trim,"*!*",v.Local.sUserName.Trim,v.Local.sSenderEmailAndName)
+					
+					F.Global.Messaging.QueueMessage(v.Caller.CompanyCode,v.Local.iUserS,v.Caller.Caller,v.Local.sSubject,v.Local.sSenderEmailAndName,v.Local.sRecipientEmailAndName,v.Local.sMsg)
+			
+				F.Intrinsic.Control.Else
+					F.Intrinsic.UI.Msgbox("Courier is not running. Please ensure courier is running in order to send emails.")
+				F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.CallSub(Loadapprovallist)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstApp.Close
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+		
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Approve_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Approve.End
+
+Program.Sub.cmdsend_click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdsend_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.iRet.Declare(Long)
+V.Local.iUserS.Declare(Long)
+V.Local.iUserR.Declare(Long)
+V.Local.iMsgID.Declare(Long)
+
+V.Local.sApprover.Declare(String)
+V.Local.sDueDatePCC.Declare(String)
+V.Local.sDueDateScreen.Declare(String)
+V.Local.sEmail.Declare(String)
+V.Local.sMessage.Declare(String)
+V.Local.sName.Declare(String)
+V.Local.sOrigEmail.Declare(String)
+V.Local.sOrigName.Declare(String)
+V.Local.sPO.Declare(String)
+V.Local.sPOLine.Declare(String)
+V.Local.sQuery.Declare(String)
+V.Local.sReason.Declare(String)
+V.Local.sSubject.Declare(String)
+V.Local.sUserEmail.Declare(String)
+
+V.Local.sOriginator.Declare
+v.Local.sRecipientEmailAndName.Declare
+V.Local.sUserName.Declare
+v.Local.sSenderEmailAndName.Declare
+
+V.Local.sReason.Set(V.Screen.F_Reject!mltxt1.Text)
+
+F.Intrinsic.String.Concat("User ID: ",V.Caller.User,V.Ambient.NewLine,V.Local.sMessage)
+F.Global.Security.GetFullName(V.Caller.User,V.Local.sName)
+F.Intrinsic.String.Concat(V.Local.sMessage,"User Name: ",V.Local.sName,V.Ambient.NewLine,V.Local.sMessage)
+F.Intrinsic.String.Concat(V.Local.sMessage,"Quote No.: ",V.Global.sQuote,V.Ambient.NewLine,V.Local.sMessage)
+F.Intrinsic.String.Concat(V.Local.sMessage,"Reason: ",V.Local.sReason,V.Local.sMessage)
+
+F.Intrinsic.String.Concat("Quote ",V.Global.sQuote.Trim," Rejected",V.Local.sSubject)
+
+'Get Sender's User ID
+Function.Global.Security.GetUserID(V.Caller.User,V.Caller.CompanyCode,V.Local.iUserS)
+Function.Global.Security.GetUserID(V.Global.sOrig.Trim,V.Caller.CompanyCode,V.Local.iUserR)
+
+''send a message that the PO has been approved
+'F.Global.Messaging.InternalMessageCreate(-1,V.Ambient.Date,V.Local.iUserS.Trim,V.Local.sSubject,V.Local.sMessage,V.Local.iMsgID)
+'F.Global.Messaging.InternalMessageQueueToUser(V.Local.iUserR,V.Local.iMsgID)
+
+'F.Global.Messaging.CreateInternalMessage(V.Global.sOrigSelect.Trim,V.Local.sMessage)
+
+'F.Global.Messaging.isCourierRunning(V.Local.iRet)
+'F.Intrinsic.Control.If(V.Local.iRet,<>,0)
+'	F.Global.Security.GetUserEmail(V.Global.sOrig.Trim,V.Caller.CompanyCode,V.Local.sOrigEmail)
+'	F.Global.Security.GetFullName(V.Global.sOrig.Trim,V.Caller.CompanyCode,V.Local.sOrigName)
+'	F.Global.Security.GetUserEmail(V.Caller.User,V.Caller.CompanyCode,V.Local.sEmail)
+'	F.Global.Security.GetFullName(V.Caller.User,V.Caller.CompanyCode,V.Local.sName)
+
+'	F.Global.Messaging.CreateEMMessage(V.Local.sOrigEmail,V.Local.sOrigName,V.Local.sEmail,V.Local.sName,V.Local.sSubject,V.Local.sMessage)
+''	F.Intrinsic.UI.Msgbox("Email Sent.")
+''F.Intrinsic.Control.Else
+''	F.Intrinsic.UI.Msgbox("Courier is not running. Please ensure courier is running in order to send emails.")
+'F.Intrinsic.Control.EndIf
+
+v.Local.sOriginator.Set(v.Global.sOrig.Trim)
+
+F.Global.Messaging.isCourierRunning(V.Local.iRet)
+F.Intrinsic.Control.If(V.Local.iRet,<>,0)
+	'Recipient's Info
+	F.Global.Security.GetUserEmail(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.sEmail)
+	F.Global.Security.GetFullName(V.Local.sOriginator.Trim,V.Caller.CompanyCode,V.Local.sOrigName)
+	F.Intrinsic.String.Concat(v.Local.sOrigName.Trim,"*!*",v.Local.sEmail.Trim,v.Local.sRecipientEmailAndName)
+	
+	'Sender's Info
+	F.Global.Security.GetUserEmail(V.Caller.User,V.Caller.CompanyCode,V.Local.sUserEmail)
+	F.Global.Security.GetFullName(V.Caller.User,V.Caller.CompanyCode,V.Local.sUserName)
+	F.Intrinsic.String.Concat(v.Local.sUserEmail.Trim,"*!*",v.Local.sUserName.Trim,v.Local.sSenderEmailAndName)
+	
+	F.Global.Messaging.QueueMessage(v.Caller.CompanyCode,v.Local.iUserS,v.Caller.Caller,v.Local.sSubject,v.Local.sSenderEmailAndName,v.Local.sRecipientEmailAndName,v.Local.sMessage)
+
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("Courier is not running. Please ensure courier is running in order to send emails.")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Format(V.Ambient.Now,"YYYY-MM-DD HH:NN:SS",V.Local.sName)
+F.Intrinsic.String.Build("update GAB_6555_APRVL set approver = '*REJECT*', approved_date = '{1}' where quote_no = '{0}'",V.Global.sQuote.Trim,V.Local.sName.Trim,V.Local.sQuery)
+F.ODBC.Connection!con.Execute(V.Local.sQuery)
+
+F.Data.DataTable.DeleteRow("dtDash",V.Global.iReject)
+'F.Data.DataTable.AcceptChanges("dtDash")
+F.Intrinsic.Control.CallSub(Loadapprovallist)
+Gui.F_Reject.mltxt1.Text("")
+Gui.F_Reject..Visible(False)
+Gui.F_Approval..Visible(False)
+Gui.F_Approval..Visible(True)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdsend_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.cmdsend_click.End
+
+Program.Sub.Reject.Start
+F.Intrinsic.Control.SetErrorHandler("Reject_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.dDate.Declare(Date)
+
+V.Local.fLimit.Declare(Float)
+
+V.Local.iMsgID.Declare
+V.Local.iRet.Declare
+V.Local.iUserR.Declare
+V.Local.iUserS.Declare
+
+V.Local.sDate.Declare
+V.Local.sEmail.Declare
+V.Local.sMsg.Declare
+V.Local.sOrigName.Declare
+V.Local.sSql.Declare
+V.Local.sSubject.Declare
+V.Local.sUserEmail.Declare
+V.Local.sUserName.Declare
+V.Local.sUser.Declare
+V.Local.sOriginator.Declare
+V.Local.sCustomer.Declare
+
+V.Local.sUser.Set(V.Caller.User)
+'Make sure that a Quote was actually selected
+F.Intrinsic.Control.If(V.Global.sQuote.Trim,<>,"0000000")
+	F.Intrinsic.String.Build("Select CUSTOMER, ORIGINATOR, APPROVER, APPROVED_DATE, MAX_DISCOUNT from GAB_6555_APRVL where quote_no = '{0}'",V.Global.sQuote.Trim,V.Global.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRW("rst",V.Global.sSql)
+	'Check if Quote in the GAB_6555_APRVL table
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+		F.Intrinsic.UI.Msgbox("Quote is not in the approval list.","NOTIFICATION")
+		F.Intrinsic.Control.CallSub(Unload)
+	F.Intrinsic.Control.Else
+		V.Local.sOriginator.Set(V.ODBC.con!rst.FieldValTrim!ORIGINATOR)
+		V.Local.sCustomer.Set(V.ODBC.con!rst.FieldValTrim!Customer)
+		
+		F.Intrinsic.String.Build("select A.GSS_USER, B.CATEGORY, B.LOWER_DISCOUNT, B.UPPER_DISCOUNT from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID WHERE A.GSS_USER = '{0}' AND (B.LOWER_DISCOUNT <= {1} AND UPPER_DISCOUNT >= {1});",V.Local.sUser.Trim,V.ODBC.con!rst.FieldValFloat!MAX_DISCOUNT,V.Local.sSQL)
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rstApp",V.Local.sSql)
+		'Check if the current user can reject the selected Quote based on Disc Tier
+		F.Intrinsic.Control.If(V.ODBC.con!rstApp.EOF,=,True)
+			F.Intrinsic.UI.Msgbox("You are not set to reject this Quote.","NOTIFICATION")
+			F.Intrinsic.Control.CallSub(Unload)
+		F.Intrinsic.Control.Else
+			F.ODBC.con!rst.Set!Approver("")
+			F.ODBC.con!rst.Set!Approved_Date("1900-01-01 00:00:00")
+			F.ODBC.con!rst.Update
+			V.Global.sOrig.Set(V.Local.sOriginator.Trim)
+			Gui.F_Reject..Show
+		F.Intrinsic.Control.EndIf
+		F.ODBC.con!rstApp.Close
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Reject_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Reject.End
+
+Program.Sub.gsfgStyleApproval.Start
+F.Intrinsic.Control.SetErrorHandler("gsfgStyle_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.i1.Declare
+
+Gui.F_Approval.GsGCApproval.ColumnEdit("gvDash","Approve","EditorButton","Approve")
+Gui.F_Approval.GsGCApproval.ColumnEdit("gvDash","Reject","EditorButton","Reject")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Approve","ShowCaption",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Reject","ShowCaption",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Customer","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","Caption","Quote")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Name","Caption","Customer")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Date_Due","Caption","Due Date")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Cust_Amount","Caption","Forex Amt.")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Max_Discount","Caption","Max Disc on Line")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Name","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Currency","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Amount","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Cust_Amount","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","DateOrder","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Date_Due","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Originator","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Date_Due","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","DateOrder","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Originator","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Currency","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Amount","DisplayCustomNumeric","##,###,##0.00")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Cust_Amount","DisplayCustomNumeric","##,###,##0.00")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Max_Discount","EditMaskType","numeric")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Max_Discount","EditMask","##0.00%")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Max_Discount","EditMaskAsDisplayFormat",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Date_Due","DisplayCustomDatetime","d")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","DateOrder","DisplayCustomDatetime","d")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","MinWidth","70")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Name","MinWidth","250")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Currency","MinWidth","60")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Amount","MinWidth","110")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Cust_Amount","MinWidth","110")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Max_Discount","MinWidth","110")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Date_Due","MinWidth","90")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","DateOrder","MinWidth","90")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Originator","MinWidth","90")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Approve","MinWidth","70")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Reject","MinWidth","70")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","CellFontUnderline",True)
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","CellForeColor",V.Color.Blue)
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","AllowEdit",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Approve","AllowEdit",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Reject","AllowEdit",False)
+
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Quote_No","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Name","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Currency","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Amount","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Cust_Amount","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Max_Discount","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","DateOrder","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Date_Due","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Originator","HeaderFontBold",True)
+
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Reject","Fixed","Right")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvDash","Approve","Fixed","Right")
+
+'Add Conditional Formatting
+Gui.F_Approval.GsGCApproval.AddStyleFormatCondition("gvDash","Cust_Amount","Cust_Amount_1","Equal",0.00)
+Gui.F_Approval.GsGCApproval.SetStyleFormatConditionProperty("gvDash","Cust_Amount","Cust_Amount_1","BackColor",v.Color.LtGrey)
+	
+F.Intrinsic.Control.For(V.Local.i1,0,V.DataTable.dtDash.RowCount--,2)
+	Gui.F_Approval.GsGCApproval.SetRowAppearance("gvDash",V.Local.i1,"backcolor","aliceblue")
+F.Intrinsic.Control.Next(V.Local.i1)
+
+F.Intrinsic.Control.For(V.Local.i1,0,V.DataTable.dtDash.RowCount--,1)
+	F.Intrinsic.Control.If(V.DataTable.dtDash(V.Local.i1).Approve!FieldValTrim,=,"*REVISE*")
+		Gui.F_Approval.GsGCApproval.SetRowAppearance("gvDash",V.Local.i1,"backcolor",V.Color.Orange)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i1)
+
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Quote_No","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CUST_CURR_CD","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_1","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_2","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_3","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_4","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_5","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_6","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_7","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_8","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_9","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_10","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_1","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_2","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_3","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_4","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_5","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_6","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_7","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_8","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_9","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Apply_10","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_1","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_2","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_3","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_4","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_5","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_6","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_7","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_8","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_9","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Tax_Zone_10","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Extension","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Extension_Quote","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","GL_Acct","Caption","GL Acct")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_No","Caption","WO No")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_Suffix","Caption","WO Suffix")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Quote_No","Caption","Quote")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustCost","Caption","Forex Price")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustTax","Caption","Forex Tax")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustExt","Caption","Forex Ext.")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustDiscAmt","Caption","Forex Disc Amt")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoCost","Caption","Base Price")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoTax","Caption","Base Tax")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoExt","Caption","Extension")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoDiscAmt","Caption","Base Disc Amt")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","DISC_PCT","Caption","Disc Pct")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Line","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Quantity","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","UM","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","GL_Acct","HeaderHAlignment","Center")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_No","HeaderHAlignment","Center")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_Suffix","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustCost","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustTax","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustExt","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustDiscAmt","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoCost","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoTax","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoExt","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoDiscAmt","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","DISC_PCT","HeaderHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","UM","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","GL_Acct","CellHAlignment","Center")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_No","CellHAlignment","Center")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_Suffix","CellHAlignment","Center")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Quantity","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustCost","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustTax","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustExt","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustDiscAmt","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoCost","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoTax","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoExt","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoDiscAmt","DisplayCustomNumeric","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","DISC_PCT","DisplayCustomNumeric","##0.00%")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Line","Width","45")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","Width","200")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Quantity","Width","100")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","UM","Width","45")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","GL_Acct","Width","100")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_No","MinWidth","100")
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_Suffix","MinWidth","100")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustCost","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustTax","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustExt","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustDiscAmt","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoCost","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoTax","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoExt","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoDiscAmt","Width","120")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","DISC_PCT","Width","80")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","AllowEdit",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Part","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Loc","Visible",False)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Line","Fixed","Left")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","Fixed","Left")
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","CellFontUnderline",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","CellForeColor",V.Color.Blue)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Line","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Description","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","Quantity","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","DISC_PCT","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","UM","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","GL_Acct","HeaderFontBold",True)
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_No","HeaderFontBold",True)
+'Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","WO_Suffix","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustCost","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustTax","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustExt","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CustDiscAmt","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoCost","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoTax","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoExt","HeaderFontBold",True)
+Gui.F_Approval.GsGCApproval.SetColumnProperty("gvQuote","CoDiscAmt","HeaderFontBold",True)
+
+Gui.F_Approval.GsGCApproval.AddSummaryItem("gvQuote","CustExt","SUMCustEXT","SUM","","","##,###,##0.0000")
+Gui.F_Approval.GsGCApproval.AddSummaryItem("gvQuote","CoExt","SUMCOEXT","SUM","","","##,###,##0.0000")
+
+'Add Conditional Formatting
+Gui.F_Approval.GsGCApproval.AddStyleFormatCondition("gvQuote","CustCost","CustCost_1","Equal",0.00)
+Gui.F_Approval.GsGCApproval.SetStyleFormatConditionProperty("gvQuote","CustCost","CustCost_1","BackColor",v.Color.LtGrey)
+
+Gui.F_Approval.GsGCApproval.AddStyleFormatCondition("gvQuote","CustTax","CustTax_1","Equal",0.00)
+Gui.F_Approval.GsGCApproval.SetStyleFormatConditionProperty("gvQuote","CustTax","CustTax_1","BackColor",v.Color.LtGrey)
+
+Gui.F_Approval.GsGCApproval.AddStyleFormatCondition("gvQuote","CustExt","CustExt_1","Equal",0.00)
+Gui.F_Approval.GsGCApproval.SetStyleFormatConditionProperty("gvQuote","CustExt","CustExt_1","BackColor",v.Color.LtGrey)
+
+Gui.F_Approval.GsGCApproval.AddStyleFormatCondition("gvQuote","CustDiscAmt","CustDiscAmt_1","Equal",0.00)
+Gui.F_Approval.GsGCApproval.SetStyleFormatConditionProperty("gvQuote","CustDiscAmt","CustDiscAmt_1","BackColor",v.Color.LtGrey)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsfgStyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.gsfgStyleApproval.End
+
+Program.Sub.LoadApprovalList.Start
+F.Intrinsic.Control.SetErrorHandler("LoadApprovalList_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.fLimit.Declare
+V.Local.fRate.Declare
+V.Local.fTax.Declare
+V.Local.fTotal.Declare
+V.Local.fTotalCust.Declare
+V.Local.fCoExt.Declare
+V.Local.fCustExt.Declare
+
+V.Local.i1.Declare
+V.Local.i2.Declare
+
+V.Local.sCurrCo.Declare
+V.Local.sFilter.Declare
+V.Local.sQuery.Declare
+V.Local.sRet.Declare
+V.Local.sUser.Declare
+V.Local.sSQL.Declare
+
+V.Local.sUser.Set(V.Caller.User)
+
+'Get Base Currency
+F.Global.General.ReadOption("000000",1,"","0000",V.Local.sCurrCo)
+
+F.Intrinsic.String.Build("select A.GSS_USER, B.CATEGORY, B.LOWER_DISCOUNT, B.UPPER_DISCOUNT from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID WHERE A.GSS_USER = '{0}'",V.Local.sUser.Trim,V.Local.sQuery)
+F.Intrinsic.Control.If(V.DataTable.dtUser.Exists)
+	F.Data.DataTable.Close("dtUser")
+F.Intrinsic.Control.EndIf
+F.Data.DataTable.CreateFromSQL("dtUser","con",V.Local.sQuery,True)
+
+F.Intrinsic.Control.If(V.DataTable.dtUser.RowCount,=,0)
+	F.Intrinsic.UI.Msgbox("You are not set as an approver")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Else
+	Gui.F_Approval.GsGCApproval.visible(False)
+	F.Intrinsic.Control.If(V.DataTable.dtDash.Exists)
+		F.Intrinsic.Control.If(V.DataView.dtDash!dvDash.Exists)
+			F.Data.DataView.Close("dtDash$dtLine","dvLine")
+			F.Data.DataView.Close("dtDash","dvDash")
+		F.Intrinsic.Control.EndIf
+		F.Data.DataTable.Close("dtDash$dtLine")
+		F.Data.DataTable.close("dtDash")
+	F.Intrinsic.Control.EndIf
+
+
+'	F.Intrinsic.String.Build("SELECT LTRIM(RTRIM(QUOTE_NO)) AS QUOTE_NO, rtrim(CUSTOMER) as CUSTOMER, ' ' as Name, ' ' as Currency,convert(Cust_Amount,SQL_FLOAT) as Cust_Amount, convert(Amount,SQL_FLOAT) as Amount, max_discount, date_quote as DateOrder, Date_Due as Date_Due, Originator as Originator FROM GAB_6555_APRVL WHERE (max_discount >= {0} and max_discount <= {1}) AND (LTRIM(RTRIM(APPROVER)) IS NULL or LTRIM(RTRIM(APPROVER)) = '' or LTRIM(RTRIM(APPROVER)) = '*REVISE*')",V.DataTable.dtUser(0).LOWER_DISCOUNT!FieldValFloat,V.DataTable.dtUser(0).UPPER_DISCOUNT!FieldValFloat,V.Local.sQuery)
+	F.Intrinsic.String.Build("SELECT LTRIM(RTRIM(A.QUOTE_NO)) AS QUOTE_NO, rtrim(A.CUSTOMER) as CUSTOMER, ' ' as Name, ' ' as Currency, convert(A.Cust_Amount,SQL_FLOAT) as Cust_Amount, convert(A.Amount,SQL_FLOAT) as Amount, A.max_discount, A.date_quote as DateOrder, A.Date_Due as Date_Due, A.Originator as Originator FROM GAB_6555_APRVL A INNER JOIN GAB_6555_APVR_CUST B ON A.CUSTOMER = B.CUSTOMER WHERE (A.max_discount >= {0} and A.max_discount <= {1}) AND (LTRIM(RTRIM(A.APPROVER)) IS NULL or LTRIM(RTRIM(A.APPROVER)) = '' or LTRIM(RTRIM(A.APPROVER)) = '*REVISE*') AND B.GSS_USER = '{2}'",V.DataTable.dtUser(0).LOWER_DISCOUNT!FieldValFloat,V.DataTable.dtUser(0).UPPER_DISCOUNT!FieldValFloat,V.Local.sUser.Trim,V.Local.sQuery)
+	f.Intrinsic.Control.If(v.DataTable.dtDash.Exists)
+		f.Data.DataTable.Close("dtDash")
+	f.Intrinsic.Control.EndIf
+	F.Data.DataTable.CreateFromSQL("dtDash","con",V.Local.sQuery,True)
+	
+'	F.Intrinsic.Control.If(V.DataTable.dtDash.Exists)
+'		F.Data.DataTable.CreateFromSQL("dtApproval","con",V.Local.sQuery,True)
+'		F.Data.DataTable.Merge("dtApproval","dtDash",True,1)
+'		F.Data.DataTable.Close("dtApproval")
+'	F.Intrinsic.Control.Else
+'		F.Data.DataTable.CreateFromSQL("dtDash","con",V.Local.sQuery,True)
+'	F.Intrinsic.Control.EndIf
+	
+'	F.Intrinsic.String.Build("select LTRIM(RTRIM(P1.QUOTE_NO)) AS QUOTE_NO, P2.record_no as Line, P2.Part, P2.Location as Loc, P2.Description, P2.qty_quoted as Quantity, P2.um_quote as UM, ROUND(ABS(P2.AMT_DISCOUNT / (P2.QTY_QUOTED * P2.PRICE)),4) AS DISC_PCT, P2.gl_account as GL_Acct, P2.Tax_1, P2.Tax_2, P2.Tax_3, P2.Tax_4, P2.Tax_5, P2.Tax_6, P2.Tax_7, P2.Tax_8, P2.Tax_9, P2.Tax_10, P2.Tax_Apply_1, P2.Tax_Apply_2, P2.Tax_Apply_3, P2.Tax_Apply_4, P2.Tax_Apply_5, P2.Tax_Apply_6, P2.Tax_Apply_7, P2.Tax_Apply_8, P2.Tax_Apply_9, P2.Tax_Apply_10, P2.Tax_Zone_1, P2.Tax_Zone_2, P2.Tax_Zone_3, P2.Tax_Zone_4, P2.Tax_Zone_5, P2.Tax_Zone_6, P2.Tax_Zone_7, P2.Tax_Zone_8, P2.Tax_Zone_9, P2.Tax_Zone_10, P2.price_Disc_Ord as CustCost, 0.0000 as CustTax, extension_quote, 0.0000 as CustExt, P2.amt_disc_quote as CustDiscAmt, P2.Discount_Price as CoCost, 0.0000 as CoTax, Extension, 0.0000 as CoExt, P2.amt_discount as CoDiscAmt from (SELECT LTRIM(RTRIM(QUOTE_NO)) AS QUOTE_NO, MAX_DISCOUNT, APPROVER FROM GAB_6555_APRVL) P1 left join v_quote_lines P2 on P1.quote_no = P2.quote_no WHERE (p1.max_discount >= {0} and p1.max_discount <= {1}) AND (LTRIM(RTRIM(p1.APPROVER)) IS NULL or LTRIM(RTRIM(p1.APPROVER)) = '' or LTRIM(RTRIM(p1.APPROVER)) = '*REVISE*') order by P1.quote_no, Line",V.DataTable.dtUser(0).LOWER_DISCOUNT!FieldValFloat,V.DataTable.dtUser(0).UPPER_DISCOUNT!FieldValFloat,V.Local.sQuery)
+'	F.Intrinsic.String.Build("select LTRIM(RTRIM(P1.QUOTE_NO)) AS QUOTE_NO, P2.record_no as Line, P2.QUOTE_CURR_CD AS CUST_CURR_CD, P2.Part, P2.Location as Loc, P2.Description, P2.qty_quoted as Quantity, P2.um_quote as UM, ROUND(ABS(P2.AMT_DISCOUNT / (P2.QTY_QUOTED * P2.PRICE)),4) AS DISC_PCT, P2.gl_account as GL_Acct, P2.Tax_1, P2.Tax_2, P2.Tax_3, P2.Tax_4, P2.Tax_5, P2.Tax_6, P2.Tax_7, P2.Tax_8, P2.Tax_9, P2.Tax_10, P2.Tax_Apply_1, P2.Tax_Apply_2, P2.Tax_Apply_3, P2.Tax_Apply_4, P2.Tax_Apply_5, P2.Tax_Apply_6, P2.Tax_Apply_7, P2.Tax_Apply_8, P2.Tax_Apply_9, P2.Tax_Apply_10, P2.Tax_Zone_1, P2.Tax_Zone_2, P2.Tax_Zone_3, P2.Tax_Zone_4, P2.Tax_Zone_5, P2.Tax_Zone_6, P2.Tax_Zone_7, P2.Tax_Zone_8, P2.Tax_Zone_9, P2.Tax_Zone_10, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.price_Disc_Ord) as CustCost, 0.0000 as CustTax, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.extension_quote) as extension_quote, 0.0000 as CustExt, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.amt_disc_quote) as CustDiscAmt, P2.Discount_Price as CoCost, 0.0000 as CoTax, Extension, 0.0000 as CoExt, P2.amt_discount as CoDiscAmt from (SELECT LTRIM(RTRIM(QUOTE_NO)) AS QUOTE_NO, MAX_DISCOUNT, APPROVER FROM GAB_6555_APRVL) P1 left join v_quote_lines P2 on P1.quote_no = P2.quote_no WHERE (p1.max_discount >= {0} and p1.max_discount <= {1}) AND (LTRIM(RTRIM(p1.APPROVER)) IS NULL or LTRIM(RTRIM(p1.APPROVER)) = '' or LTRIM(RTRIM(p1.APPROVER)) = '*REVISE*') order by P1.quote_no, Line",V.DataTable.dtUser(0).LOWER_DISCOUNT!FieldValFloat,V.DataTable.dtUser(0).UPPER_DISCOUNT!FieldValFloat,v.Local.sCurrCo,V.Local.sQuery)
+'	F.Intrinsic.String.Build("select LTRIM(RTRIM(P1.QUOTE_NO)) AS QUOTE_NO, P2.record_no as Line, P2.QUOTE_CURR_CD AS CUST_CURR_CD, P2.Part, P2.Location as Loc, P2.Description, P2.qty_quoted as Quantity, P2.um_quote as UM, ROUND(ABS(P2.AMT_DISCOUNT / (P2.QTY_QUOTED * P2.PRICE)),4) AS DISC_PCT, P2.gl_account as GL_Acct, P2.Tax_1, P2.Tax_2, P2.Tax_3, P2.Tax_4, P2.Tax_5, P2.Tax_6, P2.Tax_7, P2.Tax_8, P2.Tax_9, P2.Tax_10, P2.Tax_Apply_1, P2.Tax_Apply_2, P2.Tax_Apply_3, P2.Tax_Apply_4, P2.Tax_Apply_5, P2.Tax_Apply_6, P2.Tax_Apply_7, P2.Tax_Apply_8, P2.Tax_Apply_9, P2.Tax_Apply_10, P2.Tax_Zone_1, P2.Tax_Zone_2, P2.Tax_Zone_3, P2.Tax_Zone_4, P2.Tax_Zone_5, P2.Tax_Zone_6, P2.Tax_Zone_7, P2.Tax_Zone_8, P2.Tax_Zone_9, P2.Tax_Zone_10, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.price_Disc_Ord) as CustCost, 0.0000 as CustTax, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.extension_quote) as extension_quote, 0.0000 as CustExt, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.amt_disc_quote) as CustDiscAmt, P2.Discount_Price as CoCost, 0.0000 as CoTax, Extension, 0.0000 as CoExt, P2.amt_discount as CoDiscAmt from (SELECT LTRIM(RTRIM(QUOTE_NO)) AS QUOTE_NO, MAX_DISCOUNT, APPROVER FROM GAB_6555_APRVL A INNER JOIN GAB_6555_APVR_CUST B ON A.CUSTOMER = B.CUSTOMER WHERE B.GSS_USER = '{3}') P1 left join v_quote_lines P2 on P1.quote_no = P2.quote_no WHERE (p1.max_discount >= {0} and p1.max_discount <= {1}) AND (LTRIM(RTRIM(p1.APPROVER)) IS NULL or LTRIM(RTRIM(p1.APPROVER)) = '' or LTRIM(RTRIM(p1.APPROVER)) = '*REVISE*') order by P1.quote_no, Line",V.DataTable.dtUser(0).LOWER_DISCOUNT!FieldValFloat,V.DataTable.dtUser(0).UPPER_DISCOUNT!FieldValFloat,v.Local.sCurrCo,V.Local.sUser.Trim,V.Local.sQuery)
+	F.Intrinsic.String.Build("select LTRIM(RTRIM(P1.QUOTE_NO)) AS QUOTE_NO, P2.record_no as Line, P2.QUOTE_CURR_CD AS CUST_CURR_CD, P2.Part, P2.Location as Loc, P2.Description, P2.qty_quoted as Quantity, P2.um_quote as UM, IF(P2.QTY_QUOTED * P2.PRICE = 0,0,ROUND(ABS(P2.AMT_DISCOUNT / (P2.QTY_QUOTED * P2.PRICE)),4)) AS DISC_PCT, P2.gl_account as GL_Acct, P2.Tax_1, P2.Tax_2, P2.Tax_3, P2.Tax_4, P2.Tax_5, P2.Tax_6, P2.Tax_7, P2.Tax_8, P2.Tax_9, P2.Tax_10, P2.Tax_Apply_1, P2.Tax_Apply_2, P2.Tax_Apply_3, P2.Tax_Apply_4, P2.Tax_Apply_5, P2.Tax_Apply_6, P2.Tax_Apply_7, P2.Tax_Apply_8, P2.Tax_Apply_9, P2.Tax_Apply_10, P2.Tax_Zone_1, P2.Tax_Zone_2, P2.Tax_Zone_3, P2.Tax_Zone_4, P2.Tax_Zone_5, P2.Tax_Zone_6, P2.Tax_Zone_7, P2.Tax_Zone_8, P2.Tax_Zone_9, P2.Tax_Zone_10, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.price_Disc_Ord) as CustCost, 0.0000 as CustTax, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.extension_quote) as extension_quote, 0.0000 as CustExt, IF(P2.QUOTE_CURR_CD='{2}',0.00,P2.amt_disc_quote) as CustDiscAmt, P2.Discount_Price as CoCost, 0.0000 as CoTax, Extension, 0.0000 as CoExt, P2.amt_discount as CoDiscAmt from (SELECT LTRIM(RTRIM(QUOTE_NO)) AS QUOTE_NO, MAX_DISCOUNT, APPROVER FROM GAB_6555_APRVL A INNER JOIN GAB_6555_APVR_CUST B ON A.CUSTOMER = B.CUSTOMER WHERE B.GSS_USER = '{3}') P1 left join v_quote_lines P2 on P1.quote_no = P2.quote_no WHERE (p1.max_discount >= {0} and p1.max_discount <= {1}) AND (LTRIM(RTRIM(p1.APPROVER)) IS NULL or LTRIM(RTRIM(p1.APPROVER)) = '' or LTRIM(RTRIM(p1.APPROVER)) = '*REVISE*') order by P1.quote_no, Line",V.DataTable.dtUser(0).LOWER_DISCOUNT!FieldValFloat,V.DataTable.dtUser(0).UPPER_DISCOUNT!FieldValFloat,v.Local.sCurrCo,V.Local.sUser.Trim,V.Local.sQuery)
+	f.Intrinsic.Control.If(v.DataTable.dtLine.Exists)
+		f.Data.DataTable.Close("dtLine")
+	f.Intrinsic.Control.EndIf
+	F.Data.DataTable.CreateFromSQL("dtLine","con",V.Local.sQuery,True)
+
+	F.Intrinsic.Control.For(V.Local.i2,0,V.DataTable.dtLine.RowCount--,1)
+		V.Local.fTotal.Set(0)
+		V.Local.fTotalCust.Set(0)
+		'Get Tax 1 Amount   
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_1!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_1!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_1!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 2 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_2!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_2!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_2!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 3 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_3!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_3!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_3!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+
+		'Get Tax 4 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_4!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_4!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_4!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 5 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_5!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_5!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_5!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 6 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_6!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_6!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_6!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 7 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_7!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_7!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_7!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 8 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_8!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_8!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_8!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 9 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_9!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_9!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_9!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		'Get Tax 10 Amount
+		F.Intrinsic.Control.If(V.DataTable.dtLine(V.Local.i2).Tax_Apply_10!FieldValTrim,=,"Y")
+			F.Intrinsic.String.Build("SELECT RATE FROM V_AR_TAX_TABLES WHERE ZONE = '{0}' AND AUTH = '{1}'",V.DataTable.dtLine(V.Local.i2).Tax_Zone_10!FieldValTrim, V.DataTable.dtLine(V.Local.i2).Tax_10!FieldValTrim, V.Local.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fRate)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotal, V.Local.fTax, V.Local.fTotal)
+			F.Intrinsic.Math.Mult(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat,V.Local.fRate,V.Local.fTax)
+			F.Intrinsic.Math.Round(V.Local.fTax,2,V.Local.fTax)
+			F.Intrinsic.Math.Add(V.Local.fTotalCust, V.Local.fTax, V.Local.fTotalCust)			
+		F.Intrinsic.Control.EndIf
+	
+		F.Intrinsic.Math.Add(V.DataTable.dtLine(V.Local.i2).Extension!FieldValFloat, V.Local.fTotal, V.Local.fCoExt)
+		F.Intrinsic.Math.Add(V.DataTable.dtLine(V.Local.i2).Extension_Quote!FieldValFloat, V.Local.fTotalCust, V.Local.fCustExt)
+		
+		F.Data.DataTable.SetValue("dtLine",V.Local.i2,"CoTax",V.Local.fTotal,"CoExt",V.Local.fCoExt)
+		f.Intrinsic.Control.If(v.DataTable.dtLine(v.Local.i2).CUST_CURR_CD!FieldValTrim,<>,v.Local.sCurrCo)
+			F.Data.DataTable.SetValue("dtLine",V.Local.i2,"CustTax",V.Local.fTotalCust,"CustExt",V.Local.fCustExt)
+		f.Intrinsic.Control.Else
+			F.Data.DataTable.SetValue("dtLine",V.Local.i2,"CustTax",0.00,"CustExt",0.00)
+		f.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.Next(V.Local.i2)
+	
+	F.Data.DataTable.AddColumn("dtDash","Approve","String")
+	F.Data.DataTable.AddColumn("dtDash","Reject","String")
+	
+	'Get Customer name
+'	F.Data.Dictionary.CreateFromSQL("dicCustomer","con","SELECT rtrim(customer), NAME_CUSTOMER as Name FROM V_CUSTOMER_MASTER WHERE CUSTOMER <> ''")
+	F.Data.Dictionary.CreateFromSQL("dicCustomer","con","SELECT rtrim(customer) as Customer, NAME_CUSTOMER as Name FROM V_CUSTOMER_MASTER WHERE CUSTOMER <> '' UNION ALL SELECT rtrim(prospect) as Customer, NAME_PROSPECT as Name FROM V_PROSPECT_MASTER WHERE PROSPECT <> ''")
+	F.Data.Dictionary.SetDefaultReturn("dicCustomer","***CUSTOMER NAME NOT FOUND***")
+	F.Data.DataTable.FillFromDictionary("dtDash","dicCustomer","Customer","Name")
+	F.Data.Dictionary.Close("dicCustomer")
+	
+'	F.Data.Dictionary.CreateFromSQL("dicCustomer","con","SELECT rtrim(Customer), order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> ''")
+	F.Data.Dictionary.CreateFromSQL("dicCustomer","con","SELECT rtrim(Customer) as Customer, order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> '' UNION ALL select RTRIM(PROSPECT) as Customer, DEFAULT_CURR as Curr from V_PROSPECT_AUX where PROSPECT <> ''")
+	F.Data.Dictionary.SetDefaultReturn("dicCustomer",V.Local.sCurrCo)
+	F.Data.DataTable.FillFromDictionary("dtDash","dicCustomer","Customer","Currency")
+	F.Data.Dictionary.Close("dicCustomer")
+	
+	F.Data.DataTable.Clone("dtLine","dtDash$dtLine",True)
+	F.Data.DataTable.Merge("dtLine","dtDash$dtLine",True,1)
+	F.Data.DataTable.Close("dtLine")
+	
+	F.Data.DataTable.AddRelation("dtDash","Quote_No","dtDash$dtLine","Quote_No")
+	
+	F.Data.DataView.Create("dtDash","dvDash",22,"","Date_Due ASC")
+	F.Data.DataView.Create("dtDash$dtLine","dvLine")
+	Gui.F_Approval.GsGCApproval.AddGridviewFromDataview("gvDash","dtDash","dvDash")
+	Gui.F_Approval.GsGCApproval.AddGridviewFromDataview("gvQuote","dtDash","dvLine")
+	Gui.F_Approval.GsGCApproval.MainView("gvDash")
+	F.Intrinsic.Control.CallSub(gsfgstyleapproval)
+	Gui.F_Approval.GsGCApproval.visible(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadApprovalList_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.LoadApprovalList.End
+
+Program.Sub.RefreshGrid.Start
+F.Intrinsic.Control.SetErrorHandler("RefreshGrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.UI.InvokeWaitDialog("Refreshing grid")
+F.Intrinsic.Control.CallSub(Loadapprovallist)
+F.Intrinsic.UI.CloseWaitDialog
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("RefreshGrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.RefreshGrid.End
+
+Program.Sub.GridApproveReject.Start
+F.Intrinsic.Control.SetErrorHandler("GridApproveReject_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.i1.Declare
+V.Local.iRet.Declare
+V.Local.iRow.Declare
+V.Local.sFilter.Declare
+V.Local.sMessage.Declare
+V.Local.sParam.Declare
+V.Local.sRet.Declare
+
+F.Intrinsic.Control.If(V.Args.Column,=,"Approve")
+	V.Global.sQuote.Set(V.DataTable.dtDash(V.Args.RowIndex).Quote_No!FieldValTrim)
+	F.Intrinsic.string.Build("Do you want to approve Quote {0}?",V.Global.sQuote.Trim,V.Local.sMessage)
+	F.Intrinsic.UI.Msgbox(V.Local.sMessage,"Quote Approval Dashboard",4,V.Local.iRet)
+	F.Intrinsic.Control.If(V.Local.iRet,=,6)
+		F.Intrinsic.Control.CallSub(Approve)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.ElseIf(V.Args.Column,=,"Reject")
+	V.Global.sQuote.Set(V.DataTable.dtDash(V.Args.RowIndex).Quote_No!FieldValTrim)
+	V.Global.iReject.Set(V.Args.RowIndex)
+	F.Intrinsic.Control.CallSub(Reject)
+F.Intrinsic.Control.ElseIf(V.Args.Column,=,"Description")
+	F.Intrinsic.String.Build("Part = '{0}'",V.DataTable.dtDash$dtLine(V.Args.RowIndex).Part!FieldValTrim,V.Local.sFilter)
+	F.Data.DataTable.Select("dtInv",V.Local.sFilter,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,=,"***NORETURN***")
+		F.Intrinsic.UI.Msgbox("Part is non-inventory. Supply and demand screen is not opened")
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("{0}!*!{1}",V.DataTable.dtDash$dtLine(V.Args.RowIndex).Part!FieldValTrim,V.DataTable.dtDash$dtLine(V.Args.RowIndex).Loc!FieldValTrim,V.Local.sParam)
+		F.Global.General.CallWrapperSync(300010,V.Local.sParam)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("GridApproveReject_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_6555_QUOTE_APPROVAL.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.GridApproveReject.End
+
+Program.Sub.F_Reject_Unload.Start
+	Gui.F_Reject.mltxt1.Text("")
+	Gui.F_Reject..Visible(False)
+	Gui.F_Approval..Visible(False)
+	Gui.F_Approval..Visible(True)
+Program.Sub.F_Reject_Unload.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$tdjohan$}$20220310152040681$}$8rAQhOSvlohpQhMDm1j544LwmwXnRbkhJliIoKnW2NoAeYd8TlfM7nDwkingn0H0Gc8suMOWp3w=
+Program.Sub.Comments.End
