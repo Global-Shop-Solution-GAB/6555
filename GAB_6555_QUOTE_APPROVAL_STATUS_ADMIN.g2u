@@ -1,0 +1,388 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.F_QuoteStatus..Create
+Gui.F_QuoteStatus..Caption("Quote Approval Status (6555)")
+Gui.F_QuoteStatus..Size(15360,8775)
+Gui.F_QuoteStatus..MinX(0)
+Gui.F_QuoteStatus..MinY(0)
+Gui.F_QuoteStatus..Position(0,0)
+Gui.F_QuoteStatus..BackColor(-2147483633)
+Gui.F_QuoteStatus..MousePOinter(0)
+Gui.F_QuoteStatus..Event(UnLoad,Unload)
+Gui.F_QuoteStatus..Sizeable(False)
+Gui.F_QuoteStatus.tab1.Create(Tab)
+Gui.F_QuoteStatus.tab1.Size(14985,6870)
+Gui.F_QuoteStatus.tab1.Position(90,1275)
+Gui.F_QuoteStatus.tab1.FontSize(9)
+Gui.F_QuoteStatus.tab1.Tabs(3)
+Gui.F_QuoteStatus.tab1.SetTab(0)
+Gui.F_QuoteStatus.tab1.Caption("Approved")
+Gui.F_QuoteStatus.tab1.SetTab(1)
+Gui.F_QuoteStatus.tab1.Caption("Pending")
+Gui.F_QuoteStatus.tab1.SetTab(2)
+Gui.F_QuoteStatus.tab1.Caption("Rejected")
+Gui.F_QuoteStatus.GsGCApproved.Create(GsGridControl)
+Gui.F_QuoteStatus.GsGCApproved.Size(14730,6330)
+Gui.F_QuoteStatus.GsGCApproved.Position(75,60)
+Gui.F_QuoteStatus.GsGCApproved.Parent("tab1",0)
+Gui.F_QuoteStatus.GsGCApproved.Event(RowCellClick,GcGCApproved_Clicked)
+Gui.F_QuoteStatus.GsGCPending.Create(GsGridControl)
+Gui.F_QuoteStatus.GsGCPending.Size(14730,6330)
+Gui.F_QuoteStatus.GsGCPending.Position(60,60)
+Gui.F_QuoteStatus.GsGCPending.Parent("tab1",1)
+Gui.F_QuoteStatus.GsGCPending.Event(RowCellClick,GsGCPen_Clicked)
+Gui.F_QuoteStatus.GsGCReject.Create(GsGridControl)
+Gui.F_QuoteStatus.GsGCReject.Size(14730,6330)
+Gui.F_QuoteStatus.GsGCReject.Position(60,60)
+Gui.F_QuoteStatus.GsGCReject.Parent("tab1",2)
+Gui.F_QuoteStatus.GsGCReject.Event(RowCellClick,GsGCReject_Clicked)
+Gui.F_QuoteStatus.picGSSLogo.Create(PictureBox)
+Gui.F_QuoteStatus.picGSSLogo.Size(4125,960)
+Gui.F_QuoteStatus.picGSSLogo.Position(90,60)
+Gui.F_QuoteStatus.frame1.Create(Frame)
+Gui.F_QuoteStatus.frame1.Size(4275,1155)
+Gui.F_QuoteStatus.frame1.Position(10755,105)
+Gui.F_QuoteStatus.lbl1.Create(Label,"Cut Off Date",True,1935,255,0,105,315,True,0,"Arial",9,-2147483633,0)
+Gui.F_QuoteStatus.lbl1.Parent("frame1")
+Gui.F_QuoteStatus.dtp1.Create(DatePicker)
+Gui.F_QuoteStatus.dtp1.Size(1935,285)
+Gui.F_QuoteStatus.dtp1.Position(135,585)
+Gui.F_QuoteStatus.dtp1.Parent("frame1")
+Gui.F_QuoteStatus.cmdRefresh.Create(Button)
+Gui.F_QuoteStatus.cmdRefresh.Size(1800,660)
+Gui.F_QuoteStatus.cmdRefresh.Position(2325,255)
+Gui.F_QuoteStatus.cmdRefresh.Caption("REFRESH")
+Gui.F_QuoteStatus.cmdRefresh.FontSize(9)
+Gui.F_QuoteStatus.cmdRefresh.Event(Click,RefreshScreen)
+Gui.F_QuoteStatus.cmdRefresh.Parent("frame1")
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+V.Local.dCutoff.Declare(Date)
+
+V.Local.sGSSLogo.Declare
+V.Local.sIconPath.Declare
+
+F.ODBC.Connection!Conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass,180)
+
+F.Intrinsic.String.Concat(V.Caller.GlobalDir,"\ART\gss2.ico",V.Local.sIconPath)
+F.Intrinsic.String.Concat(V.Caller.GlobalDir,"\ART\GAB_GSS_Logo_Green_Dash.png",V.Local.sGSSLogo)
+Gui.F_QuoteStatus.picGSSLogo.Picture(V.Local.sGSSLogo)
+Gui.F_QuoteStatus..Icon(V.Local.sIconPath)
+
+F.Intrinsic.Date.DateAdd("D",-30,V.Ambient.Date,V.Local.dCutoff)
+Gui.F_QuoteStatus.dtp1.Value(V.Local.dCutoff)
+
+F.Intrinsic.Control.CallSub(refreshscreen)
+Gui.F_QuoteStatus.tab1.SetTab(0)
+
+Gui.F_QuoteStatus.GsGCApproved.Anchor(15)
+Gui.F_QuoteStatus.GsGCPending.Anchor(15)
+Gui.F_QuoteStatus.GsGCReject.Anchor(15)
+Gui.F_QuoteStatus.tab1.Anchor(15)
+Gui.F_QuoteStatus.frame1.Anchor(9)
+
+'Prevent the form from using DarkTheme
+F.Intrinsic.Task.SetEnvironmentVariable("USEDARKTHEME",False)
+Gui.F_QuoteStatus..ApplyTheme()
+
+Gui.F_QuoteStatus..Show
+Program.Sub.Main.End
+
+Program.Sub.RefreshScreen.Start
+V.Local.dCutoff.Declare(Date)
+
+V.Local.i1.Declare
+
+V.Local.sFilter.Declare
+V.Local.sRet.Declare
+V.Local.sSQL.Declare
+V.Local.sUser.Declare
+V.Local.sCurrCo.Declare
+
+V.Local.dCutoff.Set(V.Screen.F_QuoteStatus!dtp1.Value)
+
+Gui.F_QuoteStatus.tab1.Visible(False)
+
+F.Intrinsic.Control.If(V.DataTable.dtApp.Exists,=,True)
+	F.Data.DataTable.Close("dtApp")
+F.Intrinsic.Control.EndIf
+
+'Get Base Currency
+F.Global.General.ReadOption("000000",1,"","0000",V.Local.sCurrCo)
+
+F.Intrinsic.UI.InvokeWaitDialog("Loading Quote Approval Data","Quote Approval Status (6555)")
+
+F.Intrinsic.String.Build("select A.GSS_USER, B.CATEGORY, B.LOWER_DISCOUNT, B.UPPER_DISCOUNT from GAB_6555_APVR A LEFT JOIN GAB_6555_DISC_TIER B ON A.DISC_TIER_ID = B.ID WHERE A.GSS_USER = '{0}'",V.Caller.User.Trim,V.Local.sSQL)
+F.Intrinsic.Control.If(V.DataTable.dtUser.Exists)
+	F.Data.DataTable.Close("dtUser")
+F.Intrinsic.Control.EndIf
+F.Data.DataTable.CreateFromSQL("dtUser","Conx",V.Local.sSQL,True)
+
+F.Intrinsic.String.Build("select Quote_No as Quote, rtrim(Customer) as Customer, ' ' as Name, date_quote as QuoteDate, date_due as DueDate, '' as Currency, Cust_Amount as CustAmt, amount as Amount, max_discount, Originator as Originator, Approver as Approver, approved_date as ApprovedDate from GAB_6555_APRVL where (approver <> '' and approver is not null and approver <> '*REVISE*' and approver <> '*REJECT*') and date_quote >= '{0}' order by QuoteDate",V.Local.dCutoff.PervasiveDate,V.Local.sSQL)
+F.Data.DataTable.CreateFromSQL("dtApp","Conx",V.Local.sSQL,True)
+F.Data.DataTable.AddColumn("dtApp","Print","String")
+'F.Data.Dictionary.CreateFromSQL("dicCust","conx","select rtrim(customer), name_customer from v_customer_master where Customer <> ''")
+F.Data.Dictionary.CreateFromSQL("dicCust","conx","SELECT rtrim(customer) as Customer, NAME_CUSTOMER as Name FROM V_CUSTOMER_MASTER WHERE CUSTOMER <> '' UNION ALL SELECT rtrim(prospect) as Customer, NAME_PROSPECT as Name FROM V_PROSPECT_MASTER WHERE PROSPECT <> ''")
+F.Data.Dictionary.SetDefaultReturn("dicCust","")
+F.Intrinsic.UI.ChangeWaitStatus("Loading Approved Quotes")
+F.Data.DataTable.FillFromDictionary("dtApp","dicCust","Customer","Name")
+
+'F.Data.Dictionary.CreateFromSQL("dicCustomer","conx","SELECT rtrim(Customer), order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> ''")
+F.Data.Dictionary.CreateFromSQL("dicCustomer","conx","SELECT rtrim(Customer) as Customer, order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> '' UNION ALL select RTRIM(PROSPECT) as Customer, DEFAULT_CURR as Curr from V_PROSPECT_AUX where PROSPECT <> ''")
+F.Data.Dictionary.SetDefaultReturn("dicCustomer",V.Local.sCurrCo)
+F.Data.DataTable.FillFromDictionary("dtApp","dicCustomer","Customer","Currency")
+F.Data.Dictionary.Close("dicCustomer")
+
+Gui.F_QuoteStatus.GsGCApproved.AddGridviewFromDatatable("gvApp","dtApp")
+Gui.F_QuoteStatus.GsGCApproved.MainView("gvApp")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Customer","Visible",False)
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Name","Caption","Customer")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","QuoteDate","Caption","Quote Date")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","DueDate","Caption","Due Date")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","CustAmt","Caption","Forex Amt.")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Max_Discount","Caption","Max Disc On Line")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Approver","Caption","Approved By")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","ApprovedDate","Caption","Approved Date")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Print","ShowCaption",False)
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Print","AllowEdit",False)
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Quote","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Name","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","QuoteDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","DueDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Currency","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Amount","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","CustAmt","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Max_Discount","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Originator","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Approver","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","ApprovedDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Quote","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","QuoteDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","DueDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Currency","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Originator","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Approver","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","ApprovedDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","QuoteDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","DueDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","ApprovedDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Amount","DisplayCustomNumeric","##,###,##0.00")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","CustAmt","DisplayCustomNumeric","##,###,##0.00")
+'Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Max_Discount","EditMaskType","numeric")
+'Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Max_Discount","EditMask","##0.00%")
+'Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Max_Discount","EditMaskAsDisplayFormat",True)
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Max_Discount","DisplayCustomNumeric","##0.00%")
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Quote","CellForeColor",V.Color.Blue)
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Quote","CellFontUnderline",True)
+Gui.F_QuoteStatus.GsGCApproved.SetColumnProperty("gvApp","Quote","AllowEdit",False)
+Gui.F_QuoteStatus.GsGCApproved.ColumnEdit("gvApp","Print","EditorButton","Print")
+
+'Add Conditional Formatting
+Gui.F_QuoteStatus.GsGCApproved.AddStyleFormatCondition("gvApp","CustAmt","CustAmt_1","Equal",0.00)
+Gui.F_QuoteStatus.GsGCApproved.SetStyleFormatConditionProperty("gvApp","CustAmt","CustAmt_1","BackColor",v.Color.LtGrey)
+
+F.Intrinsic.Control.For(V.Local.i1,0,V.DataTable.dtApp.RowCount--,2)
+	Gui.F_QuoteStatus.GsGCApproved.SetRowAppearance("gvApp",V.Local.i1,"backcolor","aliceblue")
+F.Intrinsic.Control.Next(V.Local.i1)
+
+F.Intrinsic.Control.If(V.DataTable.dtPen.Exists,=,True)
+	F.Data.DataTable.Close("dtPen")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.ChangeWaitStatus("Loading Pending Quotes")
+F.Data.DataTable.CreateFromSQL("dtPen","Conx","select Quote_no as Quote, rtrim(Customer) as Customer, ' ' as Name, date_quote as QuoteDate, date_due as DueDate, '' as Currency, Cust_Amount as CustAmt, amount as Amount, max_discount, Originator as Originator from GAB_6555_APRVL where (approver = '' or approver is null or approver = '*REVISE*') order by QuoteDate",True)
+F.Data.DataTable.FillFromDictionary("dtPen","dicCust","Customer","Name")
+
+'F.Data.Dictionary.CreateFromSQL("dicCustomer","conx","SELECT rtrim(Customer), order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> ''")
+F.Data.Dictionary.CreateFromSQL("dicCustomer","conx","SELECT rtrim(Customer) as Customer, order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> '' UNION ALL select RTRIM(PROSPECT) as Customer, DEFAULT_CURR as Curr from V_PROSPECT_AUX where PROSPECT <> ''")
+F.Data.Dictionary.SetDefaultReturn("dicCustomer",V.Local.sCurrCo)
+F.Data.DataTable.FillFromDictionary("dtPen","dicCustomer","Customer","Currency")
+F.Data.Dictionary.Close("dicCustomer")
+Gui.F_QuoteStatus.GsGCPending.AddGridviewFromDatatable("gvPen","dtPen")
+Gui.F_QuoteStatus.GsGCPending.MainView("gvPen")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Customer","Visible",False)
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Name","Caption","Customer")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","QuoteDate","Caption","Quote Date")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","DueDate","Caption","Due Date")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","CustAmt","Caption","Forex Amt.")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Max_Discount","Caption","Max Disc On Line")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Quote","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Name","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","QuoteDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","DueDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Currency","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Amount","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","CustAmt","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Max_Discount","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Originator","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Quote","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","QuoteDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","DueDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Currency","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Originator","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","QuoteDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","DueDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Amount","DisplayCustomNumeric","##,###,##0.00")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","CustAmt","DisplayCustomNumeric","##,###,##0.00")
+'Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Max_Discount","EditMaskType","numeric")
+'Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Max_Discount","EditMask","##0.00%")
+'Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Max_Discount","EditMaskAsDisplayFormat",True)
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Max_Discount","DisplayCustomNumeric","##0.00%")
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Quote","CellForeColor",V.Color.Blue)
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Quote","CellFontUnderline",True)
+Gui.F_QuoteStatus.GsGCPending.SetColumnProperty("gvPen","Quote","AllowEdit",False)
+
+'Add Conditional Formatting
+Gui.F_QuoteStatus.GsGCPending.AddStyleFormatCondition("gvPen","CustAmt","CustAmt_1","Equal",0.00)
+Gui.F_QuoteStatus.GsGCPending.SetStyleFormatConditionProperty("gvPen","CustAmt","CustAmt_1","BackColor",v.Color.LtGrey)
+
+F.Intrinsic.Control.For(V.Local.i1,0,V.DataTable.dtPen.RowCount--,2)
+	Gui.F_QuoteStatus.GsGCPending.SetRowAppearance("gvPen",V.Local.i1,"backcolor","aliceblue")
+F.Intrinsic.Control.Next(V.Local.i1)
+
+F.Intrinsic.Control.If(V.DataTable.dtReject.Exists,=,True)
+	F.Data.DataTable.Close("dtReject")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.ChangeWaitStatus("Loading Rejected Quotes")
+'V.Local.sUser.Set(V.Caller.User)
+V.Local.sSQL.Set("select Quote_no as Quote, rtrim(Customer) as Customer, ' ' as Name, date_quote as QuoteDate, date_due as DueDate, '' as Currency, Cust_Amount as CustAmt, amount as Amount, max_discount, Originator as Originator from GAB_6555_APRVL where approver = '*REJECT*' order by QuoteDate")
+F.Data.DataTable.CreateFromSQL("dtReject","Conx",V.Local.sSQL,True)
+F.Data.DataTable.FillFromDictionary("dtReject","dicCust","Customer","Name")
+
+'F.Data.Dictionary.CreateFromSQL("dicCustomer","conx","SELECT rtrim(Customer), order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> ''")
+F.Data.Dictionary.CreateFromSQL("dicCustomer","conx","SELECT rtrim(Customer) as Customer, order_curr as Curr FROM V_CUSTOMER_INTL WHERE CUSTOMER <> '' UNION ALL select RTRIM(PROSPECT) as Customer, DEFAULT_CURR as Curr from V_PROSPECT_AUX where PROSPECT <> ''")
+F.Data.Dictionary.SetDefaultReturn("dicCustomer",V.Local.sCurrCo)
+F.Data.DataTable.FillFromDictionary("dtReject","dicCustomer","Customer","Currency")
+F.Data.Dictionary.Close("dicCustomer")
+Gui.F_QuoteStatus.GsGCReject.AddGridviewFromDatatable("gvReject","dtReject")
+Gui.F_QuoteStatus.GsGCReject.MainView("gvReject")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Customer","Visible",False)
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Name","Caption","Customer")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","QuoteDate","Caption","Quote Date")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","DueDate","Caption","Due Date")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","CustAmt","Caption","Forex Amt.")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Max_Discount","Caption","Max Disc On Line")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Quote","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Name","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","QuoteDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","DueDate","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Currency","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Amount","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","CustAmt","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Max_Discount","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Originator","HeaderHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Quote","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","QuoteDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","DueDate","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Currency","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Originator","CellHAlignment","Center")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","QuoteDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","DueDate","DisplayCustomDatetime","d")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Amount","DisplayCustomNumeric","##,###,##0.00")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","CustAmt","DisplayCustomNumeric","##,###,##0.00")
+'Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Max_Discount","EditMaskType","numeric")
+'Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Max_Discount","EditMask","##0.00%")
+'Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Max_Discount","EditMaskAsDisplayFormat",True)
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Max_Discount","DisplayCustomNumeric","##0.00%")
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Quote","CellForeColor",V.Color.Blue)
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Quote","CellFontUnderline",True)
+Gui.F_QuoteStatus.GsGCReject.SetColumnProperty("gvReject","Quote","AllowEdit",False)
+
+'Add Conditional Formatting
+Gui.F_QuoteStatus.GsGCReject.AddStyleFormatCondition("gvReject","CustAmt","CustAmt_1","Equal",0.00)
+Gui.F_QuoteStatus.GsGCReject.SetStyleFormatConditionProperty("gvReject","CustAmt","CustAmt_1","BackColor",v.Color.LtGrey)
+
+F.Intrinsic.Control.For(V.Local.i1,0,V.DataTable.dtReject.RowCount--,2)
+	Gui.F_QuoteStatus.GsGCReject.SetRowAppearance("gvReject",V.Local.i1,"backcolor","aliceblue")
+F.Intrinsic.Control.Next(V.Local.i1)
+F.Data.Dictionary.Close("dicCust")
+F.Intrinsic.UI.CloseWaitDialog
+Gui.F_QuoteStatus.tab1.Visible(True)
+Program.Sub.RefreshScreen.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.If(V.DataTable.dtApp.Exists,=,True)
+	F.Data.DataTable.Close("dtApp")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.DataTable.dtPen.Exists,=,True)
+	F.Data.DataTable.Close("dtPen")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.DataTable.dtReject.Exists,=,True)
+	F.Data.DataTable.Close("dtReject")
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!Conx.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+Program.Sub.GcGCApproved_Clicked.Start
+V.Local.sParam.Declare
+V.Local.sSQL.Declare
+V.Local.sUser.Declare
+V.Local.sPN.Declare
+V.Local.sPV.Declare
+
+F.Intrinsic.Control.If(V.Args.Column,=,"Print")
+	F.Intrinsic.String.Build("select approver from GAB_6555_APRVL where Quote_no = '{0}'",V.DataTable.dtApp(V.Args.RowIndex).Quote!FieldValTrim,V.Local.sSQL)
+	F.ODBC.Connection!Conx.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.Conx!rst.FieldValTrim!approver,<>,"")
+		F.Global.General.CallWrapperSync(920000,V.DataTable.dtApp(V.Args.RowIndex).Quote!FieldValTrim)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Approval is required to print this Quote","Quote Approval Status")
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Conx!rst.Close
+F.Intrinsic.Control.ElseIf(V.Args.Column,=,"Quote")
+	V.Local.sUser.Set(V.Caller.User)
+	F.Intrinsic.Control.If(V.Local.sUser.Trim,=,V.DataTable.dtApp(V.Args.RowIndex).Originator!FieldValTrim)
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.DataTable.dtApp(V.Args.RowIndex).Quote!FieldValTrim,"O","*!*ZDR*!*",V.Local.sParam)
+		F.Global.General.CallWrapperASync(251000,V.Local.sParam)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.DataTable.dtApp(V.Args.RowIndex).Quote!FieldValTrim,"V","*!*ZDR*!*",V.Local.sParam)
+		F.Global.General.CallWrapperASync(251000,V.Local.sParam)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+Program.Sub.GcGCApproved_Clicked.End
+
+Program.Sub.GsGCPen_Clicked.Start
+V.Local.sParam.Declare
+V.Local.sUser.Declare
+
+F.Intrinsic.Control.If(V.Args.Column,=,"Quote")
+	V.Local.sUser.Set(V.Caller.User)
+	F.Intrinsic.Control.If(V.Local.sUser.Trim,=,V.DataTable.dtPen(V.Args.RowIndex).Originator!FieldValTrim)
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.DataTable.dtPen(V.Args.RowIndex).Quote!FieldValTrim,"O","*!*ZDR*!*",V.Local.sParam)
+		F.Global.General.CallWrapperASync(251000,V.Local.sParam)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.DataTable.dtPen(V.Args.RowIndex).Quote!FieldValTrim,"V","*!*ZDR*!*",V.Local.sParam)
+		F.Global.General.CallWrapperASync(251000,V.Local.sParam)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+Program.Sub.GsGCPen_Clicked.End
+
+Program.Sub.GsGCReject_Clicked.Start
+V.Local.sParam.Declare
+V.Local.sUser.Declare
+
+F.Intrinsic.Control.If(V.Args.Column,=,"Quote")
+	V.Local.sUser.Set(V.Caller.User)
+	F.Intrinsic.Control.If(V.Local.sUser.Trim,=,V.DataTable.dtReject(V.Args.RowIndex).Originator!FieldValTrim)
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.DataTable.dtReject(V.Args.RowIndex).Quote!FieldValTrim,"O","*!*ZDR*!*",V.Local.sParam)
+		F.Global.General.CallWrapperASync(251000,V.Local.sParam)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.ConcatCallWrapperArgs(V.DataTable.dtReject(V.Args.RowIndex).Quote!FieldValTrim,"V","*!*ZDR*!*",V.Local.sParam)
+		F.Global.General.CallWrapperASync(251000,V.Local.sParam)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+Program.Sub.GsGCReject_Clicked.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$tdjohan$}$20220310152541861$}$8rAQhOSvlohpQhMDm1j544LwmwXnRbkhJliIoKnW2NoAeYd8TlfM7vAEIlvVrO+w5jklVNRkP5U=
+Program.Sub.Comments.End
